@@ -1,0 +1,23 @@
+{
+  "name": "les-petits-plats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathLouss/LesPetitsPlats-OC.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NathLouss/LesPetitsPlats-OC/issues"
+  },
+  "homepage": "https://github.com/NathLouss/LesPetitsPlats-OC#readme",
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "prettier": "2.7.1"
+  }
+}
