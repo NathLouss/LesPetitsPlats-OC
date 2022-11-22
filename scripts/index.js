@@ -9,12 +9,10 @@ async function displayRecipes(datas) {
     const recipeCardDOM = recipeModel.getRecipeCardDOM();
     recipesSection.insertAdjacentHTML("afterbegin", recipeCardDOM);
 
-    const ingredientsList =
-      document.getElementsByClassName("recipe_ingredients");
-    recipeModel = recipeFactory(data);
-    debugger;
+    const recipeDetails = document.querySelector(".recipe_ingredients");
+    // recipeModel = recipeFactory(data);
     const ingredientDOM = recipeModel.getIngredientsList();
-    ingredientsList.appendChild(ingredientDOM);
+    recipeDetails.appendChild(ingredientDOM);
   });
 }
 
