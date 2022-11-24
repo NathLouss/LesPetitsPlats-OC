@@ -4,8 +4,8 @@ filterBtn.style.display = "inline";
 const filterList = document.querySelector(".filter_list");
 
 // ouverture/fermeture de la dropdown de tri
-export function toggleDropDown() {
-  if (filterBtn.style.display == "inline") {
+export function toggleDropDown(elt) {
+  if (elt.style.display == "inline") {
     filterBtn.style.display = "none";
     filterList.style.display = "block";
   } else {
@@ -16,5 +16,5 @@ export function toggleDropDown() {
 
 const triggers = document.querySelectorAll(".trigger");
 triggers.forEach((btn) =>
-  btn.addEventListener("click", () => toggleDropDown())
+  btn.addEventListener("click", (e) => toggleDropDown(e.target))
 );

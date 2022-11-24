@@ -4,17 +4,13 @@ import { searchRecipe } from "./utils/searchBar.js";
 import { toggleDropDown } from "./utils/filter.js";
 
 // création et affichage des cards recette via la recipeFactory
-async function displayRecipes(datas) {
+function displayRecipes(datas) {
   const recipesSection = document.getElementById("recipes");
 
   datas.forEach((data) => {
     let recipeModel = recipeFactory(data);
     const recipeCardDOM = recipeModel.getRecipeCardDOM();
-    recipesSection.insertAdjacentHTML("afterbegin", recipeCardDOM);
-
-    const recipeDetails = document.querySelector(".recipe_ingredients");
-    const ingredientDOM = recipeModel.getIngredientsList();
-    recipeDetails.appendChild(ingredientDOM);
+    recipesSection.appendChild(recipeCardDOM);
   });
 }
 
