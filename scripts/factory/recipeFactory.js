@@ -10,6 +10,7 @@ export function recipeFactory(data) {
     ustensils,
   } = data;
 
+  // renvoi l'élément HTML d'une recette
   function getRecipeCardDOM() {
     const card = document.createElement("article");
     card.classList.add("recipe_card");
@@ -94,5 +95,39 @@ export function recipeFactory(data) {
     return card;
   }
 
-  return { getRecipeCardDOM };
+  let ingredientsList = [];
+  function getIngredientsList() {
+    debugger;
+    ingredients.forEach((ingredient) => {
+      ingredientsList.push(ingredient["ingredient"]);
+    });
+  }
+  getIngredientsList();
+
+  // function getApplianceList() {
+  //   let appliancesList = [];
+  //   console.log(appliance);
+  //   appliance.push(appliancesList);
+  //   console.log(appliancesList);
+
+  //   // appliance.forEach((appliance) => {
+  //   //   appliancesList.push(appliance);
+  //   // });
+
+  //   return appliancesList;
+  // }
+
+  // getApplianceList();
+
+  // function getList(option) {
+  //   const list = [];
+  //   if (option == ingredients) {
+  //     ingredients.forEach((ingredient) => {
+  //       console.log(ingredient["ingredient"]);
+  //       list.push(ingredient["ingredient"]);
+  //     });
+  //   }
+  // }
+
+  return { getRecipeCardDOM, getIngredientsList };
 }
