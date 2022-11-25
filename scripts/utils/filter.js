@@ -1,4 +1,4 @@
-// // déclaration variables
+// déclaration variables
 // const filterBtn = document.querySelector(".filter_btn");
 // filterBtn.style.display = "inline";
 // const filterList = document.querySelector(".filter_list");
