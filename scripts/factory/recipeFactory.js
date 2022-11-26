@@ -95,7 +95,8 @@ export function recipeFactory(data) {
     return card;
   }
 
-  function getIngredientsList() {
+  // renvoi les ingrédients d'une recette
+  function getIngredients() {
     const ingredientsToList = [];
     ingredients.forEach((ingredient) => {
       ingredientsToList.push(ingredient["ingredient"]);
@@ -103,20 +104,15 @@ export function recipeFactory(data) {
     return ingredientsToList;
   }
 
-  // function getApplianceList() {
-  //   let appliancesList = [];
-  //   console.log(appliance);
-  //   appliance.push(appliancesList);
-  //   console.log(appliancesList);
+  // renvoi les appareils d'une recette
+  function getAppliances() {
+    return appliance;
+  }
 
-  //   // appliance.forEach((appliance) => {
-  //   //   appliancesList.push(appliance);
-  //   // });
-
-  //   return appliancesList;
-  // }
-
-  // getApplianceList();
+  // renvoi les ustensiles d'une recette
+  function getUstensiles() {
+    return ustensils;
+  }
 
   // function getList(option) {
   //   const list = [];
@@ -128,5 +124,5 @@ export function recipeFactory(data) {
   //   }
   // }
 
-  return { getRecipeCardDOM, getIngredientsList };
+  return { getRecipeCardDOM, getIngredients, getAppliances, getUstensiles };
 }

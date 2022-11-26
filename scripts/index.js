@@ -32,12 +32,43 @@ function createListIngredients(datas) {
   let ingredientsListBrut = [];
   datas.forEach((data) => {
     let listeModel = recipeFactory(data);
-    const ingredients = listeModel.getIngredientsList();
+    const ingredients = listeModel.getIngredients();
     ingredientsListBrut.push(...ingredients);
   });
   ingredientsListBrut.sort();
   ingredientsList = [...new Set(ingredientsListBrut)];
-  console.log(ingredientsList);
+
+  return ingredientsList;
+}
+
+let appliancesList = [];
+// création liste appareils via la recipeFactory
+function createListAppliances(datas) {
+  let applianceListBrut = [];
+  datas.forEach((data) => {
+    let listeModel = recipeFactory(data);
+    const appliances = listeModel.getAppliances();
+    applianceListBrut.push(appliances);
+  });
+  applianceListBrut.sort();
+  appliancesList = [...new Set(applianceListBrut)];
+
+  return appliancesList;
+}
+
+let ustensilsList = [];
+// création liste ustensiles via la recipeFactory
+function createListUstensils(datas) {
+  let ustensilsListBrut = [];
+  datas.forEach((data) => {
+    let listeModel = recipeFactory(data);
+    const ustensils = listeModel.getUstensiles();
+    ustensilsListBrut.push(...ustensils);
+  });
+  ustensilsListBrut.sort();
+  ustensilsList = [...new Set(ustensilsListBrut)];
+  console.log(ustensilsList);
+  return ustensilsList;
 }
 
 async function init() {
@@ -45,6 +76,8 @@ async function init() {
   displayRecipes(datas);
   displayFilter(filterOptions);
   createListIngredients(datas);
+  createListAppliances(datas);
+  createListUstensils(datas);
 }
 
 init();
