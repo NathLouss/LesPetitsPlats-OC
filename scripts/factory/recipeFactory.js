@@ -95,14 +95,13 @@ export function recipeFactory(data) {
     return card;
   }
 
-  let ingredientsList = [];
   function getIngredientsList() {
-    debugger;
+    const ingredientsToList = [];
     ingredients.forEach((ingredient) => {
-      ingredientsList.push(ingredient["ingredient"]);
+      ingredientsToList.push(ingredient["ingredient"]);
     });
+    return ingredientsToList;
   }
-  getIngredientsList();
 
   // function getApplianceList() {
   //   let appliancesList = [];
