@@ -10,21 +10,20 @@ export function filterFactory(data) {
   const optionWithoutAccent = optionSingular
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
+  const selectedFilter = optionWithoutAccent;
 
   // renvoi l'élément HTML d'un filtre
   function getFilterCardDOM() {
     const filter = document.createElement("div");
-    filter.setAttribute("id", `filter_${optionWithoutAccent}`);
+    filter.setAttribute("id", `filter_${selectedFilter}`);
     filter.classList.add("filter");
 
     const btn = document.createElement("button");
-    btn.setAttribute("id", `filter_btn_${optionWithoutAccent}`);
+    btn.setAttribute("id", `filter_btn_${selectedFilter}`);
     btn.classList.add("filter_btn");
     // btn.style.display = "inline";
     // btn.classList.add("filter_btn", "trigger");
-    btn.addEventListener("click", (e) =>
-      toggleDropDown(e, optionWithoutAccent)
-    );
+    btn.addEventListener("click", (e) => toggleDropDown(e, selectedFilter));
     filter.appendChild(btn);
 
     const btnName = document.createElement("span");
@@ -39,13 +38,13 @@ export function filterFactory(data) {
     btnChevron.appendChild(btnChevronIcon);
 
     const filterList = document.createElement("div");
-    filterList.setAttribute("id", `filter_by_${optionWithoutAccent}`);
+    filterList.setAttribute("id", `filter_by_${selectedFilter}`);
     filterList.classList.add("filter_list");
     filter.appendChild(filterList);
 
     const input = document.createElement("input");
     input.setAttribute("type", "text");
-    input.setAttribute("id", `input_${optionWithoutAccent}`);
+    input.setAttribute("id", `input_${selectedFilter}`);
     input.classList.add("filter_input");
     input.setAttribute("placeholder", `Rechercher un ${optionSingular}`);
     input.addEventListener("keyup", (e) => {
@@ -60,7 +59,7 @@ export function filterFactory(data) {
     const inputChevron = document.createElement("span");
     inputChevron.classList.add("filter_close");
     inputChevron.addEventListener("click", (e) =>
-      toggleDropDown(e, optionWithoutAccent)
+      toggleDropDown(e, selectedFilter)
     );
     filterList.appendChild(inputChevron);
 
@@ -69,7 +68,7 @@ export function filterFactory(data) {
     inputChevron.appendChild(inputChevronIcon);
 
     const filterUl = document.createElement("ul");
-    filterUl.setAttribute("id", `filter_list_${optionWithoutAccent}`);
+    filterUl.setAttribute("id", `filter_list_${selectedFilter}`);
     filterUl.classList.add("list_option");
     filterList.appendChild(filterUl);
 
@@ -85,9 +84,7 @@ export function filterFactory(data) {
   }
 
   // gestion de la dropdown de filtre
-  function toggleDropDown(e, optionWithoutAccent) {
-    debugger;
-    console.log(e.currentTarget);
+  function toggleDropDown(e, selectedFilter) {
     const allList = document.querySelectorAll(".filter_list");
     allList.forEach((list) => {
       list.style.display = "none";
@@ -98,15 +95,19 @@ export function filterFactory(data) {
     });
     if (e.currentTarget.className != "filter_close") {
       const btnClicked = document.getElementById(
-        `filter_btn_${optionWithoutAccent}`
+        `filter_btn_${selectedFilter}`
       );
       btnClicked.style.display = "none";
       const filterSelected = document.getElementById(
-        `filter_by_${optionWithoutAccent}`
+        `filter_by_${selectedFilter}`
       );
       filterSelected.style.display = "block";
-      displayFilterList(optionWithoutAccent);
+      displayFilterList(selectedFilter);
     }
+  }
+
+  function getSelectedFilter() {
+    return selectedFilter;
   }
 
   // renvoi l'élément HTML d'un filtre
@@ -120,14 +121,14 @@ export function filterFactory(data) {
 
   // function pour remplir les li avec ou sans saisie
   // ici on a l'option filtre mais pas le tableau/liste
-  function displayFilterList(optionWithoutAccent = null) {
-    if (optionWithoutAccent) {
-      //   let filterModel = recipeFactory(keyword);
-      //   const filterList = filterModel.getList();
-      //   console.log(filterList);
+  function displayFilterList(selectedFilter = null) {
+    if (selectedFilter) {
+      // let filterModel = recipeFactory(keyword);
+      // const filterList = filterModel.getList();
+      // console.log(filterList);
     } else {
     }
   }
 
-  return { getFilterCardDOM };
+  return { getFilterCardDOM, getSelectedFilter };
 }

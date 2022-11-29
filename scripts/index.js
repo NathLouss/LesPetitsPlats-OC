@@ -53,7 +53,16 @@ function createFilterOptionList(datas) {
 }
 
 // rempli la liste des filtres selon option tri sélectionné
-function filledListFilter() {}
+function filledListFilter(filterOptionList) {
+  const liSection = document.getElementById(`filter_list_${selectedFilter}`);
+
+  filterOptionList.forEach((option) => {
+    const filterLi = document.createElement("li");
+    filterLi.classList.add("filter_li");
+    filterLi.content = option;
+    liSection.appendChild(filterLi);
+  });
+}
 
 // function pour remplir les li avec ou sans saisie
 function displayFilterList(keyword = null) {
@@ -71,6 +80,7 @@ async function init() {
   const datas = await getRecipes();
   displayRecipes(datas);
   displayFilter(filterOptions);
+  createFilterOptionList(datas);
   // createListIngredients(datas);
   // createListAppliances(datas);
   // createListUstensils(datas);
