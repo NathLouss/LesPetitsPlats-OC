@@ -77,8 +77,12 @@
   top: 2px;
 }
 
-.fa-chevron-up {
+.filter_close {
   position: relative;
   top: 1px;
   right: 40px;
 }
+
+/* .fa-chevron-up {
+
+} */

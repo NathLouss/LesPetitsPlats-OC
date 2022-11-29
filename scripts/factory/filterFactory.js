@@ -20,9 +20,11 @@ export function filterFactory(data) {
     const btn = document.createElement("button");
     btn.setAttribute("id", `filter_btn_${optionWithoutAccent}`);
     btn.classList.add("filter_btn");
-    btn.style.display = "inline";
+    // btn.style.display = "inline";
     // btn.classList.add("filter_btn", "trigger");
-    btn.addEventListener("click", () => toggleDropDown(optionWithoutAccent));
+    btn.addEventListener("click", (e) =>
+      toggleDropDown(e, optionWithoutAccent)
+    );
     filter.appendChild(btn);
 
     const btnName = document.createElement("span");
@@ -56,9 +58,9 @@ export function filterFactory(data) {
     filterList.appendChild(input);
 
     const inputChevron = document.createElement("span");
-    // inputChevron.classList.add("trigger");
-    inputChevron.addEventListener("click", () =>
-      toggleDropDown(optionWithoutAccent)
+    inputChevron.classList.add("filter_close");
+    inputChevron.addEventListener("click", (e) =>
+      toggleDropDown(e, optionWithoutAccent)
     );
     filterList.appendChild(inputChevron);
 
@@ -83,7 +85,9 @@ export function filterFactory(data) {
   }
 
   // gestion de la dropdown de filtre
-  function toggleDropDown(optionWithoutAccent) {
+  function toggleDropDown(e, optionWithoutAccent) {
+    debugger;
+    console.log(e.currentTarget);
     const allList = document.querySelectorAll(".filter_list");
     allList.forEach((list) => {
       list.style.display = "none";
@@ -92,16 +96,17 @@ export function filterFactory(data) {
     allBtn.forEach((list) => {
       list.style.display = "block";
     });
-
-    const btnClicked = document.getElementById(
-      `filter_btn_${optionWithoutAccent}`
-    );
-    btnClicked.style.display = "none";
-    const filterSelected = document.getElementById(
-      `filter_by_${optionWithoutAccent}`
-    );
-    filterSelected.style.display = "block";
-    displayFilterList();
+    if (e.currentTarget.className != "filter_close") {
+      const btnClicked = document.getElementById(
+        `filter_btn_${optionWithoutAccent}`
+      );
+      btnClicked.style.display = "none";
+      const filterSelected = document.getElementById(
+        `filter_by_${optionWithoutAccent}`
+      );
+      filterSelected.style.display = "block";
+      displayFilterList(optionWithoutAccent);
+    }
   }
 
   // renvoi l'élément HTML d'un filtre
@@ -115,13 +120,13 @@ export function filterFactory(data) {
 
   // function pour remplir les li avec ou sans saisie
   // ici on a l'option filtre mais pas le tableau/liste
-  function displayFilterList(keyword = null) {
-    // if (keyword) {
-    //   let filterModel = recipeFactory(keyword);
-    //   const filterList = filterModel.getList();
-    //   console.log(filterList);
-    // } else {
-    // }
+  function displayFilterList(optionWithoutAccent = null) {
+    if (optionWithoutAccent) {
+      //   let filterModel = recipeFactory(keyword);
+      //   const filterList = filterModel.getList();
+      //   console.log(filterList);
+    } else {
+    }
   }
 
   return { getFilterCardDOM };
