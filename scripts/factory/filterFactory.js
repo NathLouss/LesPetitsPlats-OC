@@ -31,6 +31,7 @@ export function filterFactory(data) {
     btn.appendChild(btnName);
 
     const btnChevron = document.createElement("span");
+    btnChevron.classList.add("filter_chevron_up");
     btn.appendChild(btnChevron);
 
     const btnChevronIcon = document.createElement("i");

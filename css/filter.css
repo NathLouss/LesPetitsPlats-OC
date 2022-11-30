@@ -18,6 +18,7 @@
   text-align: left;
   border: none;
   cursor: pointer;
+  position: relative;
 }
 
 .filter_btn,
@@ -33,6 +34,7 @@
   display: none;
   cursor: pointer;
   z-index: 1;
+  position: relative;
 }
 
 #filter_btn_ingredient,
@@ -71,14 +73,14 @@
   outline: none;
 }
 
-.fa-chevron-down {
-  position: relative;
-  left: 20px;
-  top: 2px;
+.filter_chevron_up {
+  position: absolute;
+  right: 15px;
+  top: 22px;
 }
 
 .filter_close {
-  position: relative;
-  top: 1px;
-  right: 40px;
+  position: absolute;
+  top: 22px;
+  right: 15px;
 }
