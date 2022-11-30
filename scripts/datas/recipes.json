@@ -362,7 +362,7 @@
     "time": 60,
     "description": "Commencer par cuire les pommes de terre dans l'eau bouillante. Puis epluchez les et coupez les en rondelles. Emincer les oignons puis les faire dorer dans du beurre. Ajouter le jambon fumé coupé en en morceaux ainsi que les pommes de terres. Salez, poivrez à votre gout ( et celui de vos convives ) Laissez cuisiner durant environ 10 minutes puis ajouter le vin blanc. Après 5 minutes, mettre le tout dans un plat à gratin. Coupez le rebelochon, soit en tranches, soit le couper en 2 dans le sens de l'épaisseur et recouvrir les pommes de terre. Cuire au four (environ 220°) durant 25 minutes. C'est prêt !",
     "appliance": "Four",
-    "ustensils": ["plat à gratin", "couteau", "Économe"]
+    "ustensils": ["plat à gratin", "couteau", "économe"]
   },
   {
     "id": 11,
@@ -745,7 +745,7 @@
     "time": 30,
     "description": "Cuisiner la viande hachée dans une poelle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraîche à la viande hachée. Serivir.",
     "appliance": "Casserole",
-    "ustensils": ["Cuillère en bois", "louche", "couteau"]
+    "ustensils": ["cuillère en bois", "louche", "couteau"]
   },
   {
     "id": 22,
@@ -820,7 +820,7 @@
     "time": 60,
     "description": "Etaler la pate dans un moule et la piquer.Parsemer de beurre. Faire chauffer les lardon dans une poêle. Battre les oeufs en ajoutant la crème fraîche et le lait. Finalement ajouter les lardons, salez poivrez à votre gout. Verser l'ensemble sur la pâte. Cuire environ 50 minutes.",
     "appliance": "Four",
-    "ustensils": ["moule à gateaux", "rouleau à patisserie", "fouet"]
+    "ustensils": ["moule à gateaux", "rouleau à pâtisserie", "fouet"]
   },
   {
     "id": 24,
@@ -1084,7 +1084,7 @@
     "time": 60,
     "description": "Découper en cubes les carottes et pommes de terre. Faire revenir dans du beurre. Ajouter les lardons, une fois les lardons dorés, ajouter un grand verre d'eau. Ajouter les petit poids et les haricots verts ( tous deux pré cuits ). Ajouter Sel, poivre, thyms et laurier",
     "appliance": "Poële",
-    "ustensils": ["Couteau", "économe"]
+    "ustensils": ["couteau", "économe"]
   },
   {
     "id": 32,
@@ -1305,7 +1305,7 @@
     "time": 60,
     "description": "Couper les courgettes dans le sens de la longueur. Vider les courgette dans un saladier. Réserver.Faire revenir la chair des courgettes dans 25cl d'huile d'olive. Ajouter l'oignon puis la viande hachée. Mettre la farce dans les courgettes. Ajouter le coulis de tomates. Mettre au four pendant 30 minutes. Avant la fin de la cuisson ajouter le fromage rapé",
     "appliance": "Four",
-    "ustensils": ["couteau", "cuillère en bois", "Poelle à frire"]
+    "ustensils": ["couteau", "cuillère en bois", "poelle à frire"]
   },
   {
     "id": 38,
@@ -1335,7 +1335,7 @@
     "time": 20,
     "description": "Fouettez les oeufs, le sucre et le lait. tremper les tranches de pain. Le cuire au four pendant environ 10 minutes à 180°. Servir",
     "appliance": "Four",
-    "ustensils": ["fouet", "bol", "Cuillère à Soupe"]
+    "ustensils": ["fouet", "bol", "cuillère à Soupe"]
   },
   {
     "id": 39,
@@ -1482,7 +1482,7 @@
     "time": 50,
     "description": "Préchauffez le fours à 200°. Etaler la pate. La mettre dans un moule. Battre les oeufs avec le sucre. Ajouter le jus de citron et le beurre. Verser le tout sur la pate. Au four 30 minutes. Bon appetit ",
     "appliance": "Four",
-    "ustensils": ["rouleau à patisserie", "moule à tarte", "presse citron"]
+    "ustensils": ["rouleau à pâtisserie", "moule à tarte", "presse citron"]
   },
   {
     "id": 44,
@@ -1654,7 +1654,7 @@
     "time": 40,
     "description": "Étaler la pate a pizza. Ecraser les tomates pelées, les étaler sur la pâte, ajouter les lardons et les champignons. Ajouter le gruyère eet passer au four à 220° durant 20 minutes",
     "appliance": "Four",
-    "ustensils": ["rouleau à patisserie", "râpe à fromage", "couteau"]
+    "ustensils": ["rouleau à pâtisserie", "râpe à fromage", "couteau"]
   },
   {
     "id": 49,
@@ -1722,6 +1722,6 @@
     "time": 60,
     "description": "Préparer la frangipane : Mélanger le sucre la poudre d'amander, le beurre et les oeufs. Etaler la moitier de la pate feuilleté et mettre dans un moule à tarte. Garnir de frangipane et recouvrir du reste de pate feuilletée. Mettre au four 30 minutes",
     "appliance": "Four",
-    "ustensils": ["rouleau à patisserie", "fouet"]
+    "ustensils": ["rouleau à pâtisserie", "fouet"]
   }
 ]

@@ -38,17 +38,20 @@
 }
 
 #filter_btn_ingredient,
-#input_ingredient {
+#input_ingredient,
+#filter_list_ingredient {
   background-color: #3282f7;
 }
 
 #filter_btn_appareil,
-#input_appareil {
+#input_appareil,
+#filter_list_appareil {
   background-color: #68d9a4;
 }
 
 #filter_btn_ustensile,
-#input_ustensile {
+#input_ustensile,
+#filter_list_ustensile {
   background-color: #ed6454;
 }
 
@@ -60,6 +63,10 @@
   color: white;
   font-family: "Lato";
   font-size: 18px;
+}
+
+.filter_input_active {
+  border-radius: 5px 5px 0 0;
 }
 
 .filter_input::placeholder {
@@ -83,4 +90,19 @@
   position: absolute;
   top: 22px;
   right: 15px;
+}
+
+.list_option {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 70px;
+  row-gap: 10px;
+  position: absolute;
+  height: 397px;
+  width: 667px;
+  background: black;
+  padding: 0 16px 19px;
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
 }
