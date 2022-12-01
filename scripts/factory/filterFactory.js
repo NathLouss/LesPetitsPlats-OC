@@ -109,7 +109,26 @@ export function filterFactory(data) {
     const liSection = document.getElementById(`filter_list_${selectedFilter}`);
 
     if (keyword) {
-      console.log(keyword, selectedFilter);
+      console.log(keyword);
+      // on a récupéré à minima 3 lettres
+      // il faut chercher si dans le tableau de l'option sélectionnée
+      // selectedMedias = medias.filter((m) => m.photographerId == idPhotographer);
+      // des éléments ont les mêmes lettres
+      debugger;
+      const regex = `/${keyword}/gm`;
+      // const regex = /Blender/gm;
+      // il faut les récupérer les pusher dans un tableau
+      const matchKeywords = optionArray.filter((o) => {
+        regex.test(o) == "true";
+      });
+      // puis itérer sur le tableau pour créer la liste
+      matchKeywords.forEach((elt) => {
+        const liFilter = document.createElement("li");
+        liFilter.classList.add("filter_li");
+        liFilter.textContent = elt;
+        liFilter.addEventListener("click", (e) => filterByKeyword(e));
+        liSection.appendChild(liFilter);
+      });
     } else {
       optionArray.forEach((elt) => {
         const liFilter = document.createElement("li");
