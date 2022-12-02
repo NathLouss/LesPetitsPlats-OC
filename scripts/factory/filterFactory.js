@@ -1,7 +1,6 @@
 export function filterFactory(data) {
   const option = data;
   const optionKey = Object.keys(option);
-  // console.log("lg4", optionKey);
   const optionName = optionKey.toString();
   const optionLowerCase = optionName.toLowerCase();
   let optionSingular;
@@ -14,7 +13,6 @@ export function filterFactory(data) {
   const selectedFilter = optionWithoutAccent;
   const optionValue = Object.values(option);
   const optionArray = optionValue[0];
-  // console.log("lg16", typeof optionArray, optionArray);
 
   // renvoi l'élément HTML d'un filtre
   function getFilterCardDOM() {
@@ -103,29 +101,31 @@ export function filterFactory(data) {
     }
   }
 
+  function majFirstLetter(elt) {
+    return (elt + "").charAt(0).toUpperCase() + elt.substr(1);
+  }
+
   // rempli la liste des filtres selon option tri sélectionné
   // function pour remplir les li avec ou sans saisie
   function filledListFilter(keyword = null) {
     const liSection = document.getElementById(`filter_list_${selectedFilter}`);
-
     if (keyword) {
-      console.log(keyword);
-      // on a récupéré à minima 3 lettres
-      // il faut chercher si dans le tableau de l'option sélectionnée
-      // selectedMedias = medias.filter((m) => m.photographerId == idPhotographer);
-      // des éléments ont les mêmes lettres
-      debugger;
-      const regex = `/${keyword}/gm`;
-      // const regex = /Blender/gm;
-      // il faut les récupérer les pusher dans un tableau
-      const matchKeywords = optionArray.filter((o) => {
-        regex.test(o) == "true";
+      const keywordFormated = keyword
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      const regex = new RegExp(keywordFormated);
+      let matchKeywords = optionArray.filter((o) => {
+        // const oFormated = o.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        // regex.test(oFormated);
+        return regex.test(o.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
       });
-      // puis itérer sur le tableau pour créer la liste
+      liSection.innerHTML = "";
       matchKeywords.forEach((elt) => {
         const liFilter = document.createElement("li");
         liFilter.classList.add("filter_li");
-        liFilter.textContent = elt;
+        const eltFormated = majFirstLetter(elt);
+        liFilter.textContent = eltFormated;
         liFilter.addEventListener("click", (e) => filterByKeyword(e));
         liSection.appendChild(liFilter);
       });
@@ -133,7 +133,8 @@ export function filterFactory(data) {
       optionArray.forEach((elt) => {
         const liFilter = document.createElement("li");
         liFilter.classList.add("filter_li");
-        liFilter.textContent = elt;
+        const eltFormated = majFirstLetter(elt);
+        liFilter.textContent = eltFormated;
         liFilter.addEventListener("click", (e) => filterByKeyword(e));
         liSection.appendChild(liFilter);
       });
