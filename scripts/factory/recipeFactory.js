@@ -112,7 +112,6 @@ export function recipeFactory(data) {
 
   // renvoi les ustensiles d'une recette
   function getUstensiles() {
-    debugger;
     const formatedUstensils = [];
     ustensils.forEach((ustensil) => {
       formatedUstensils.push(ustensil.toLowerCase());

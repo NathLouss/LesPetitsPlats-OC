@@ -51,11 +51,17 @@ export function filterFactory(data) {
     input.setAttribute("id", `input_${selectedFilter}`);
     input.classList.add("filter_input");
     input.setAttribute("placeholder", `Rechercher un ${optionSingular}`);
-    input.addEventListener("keyup", (e) => {
+    input.addEventListener("input", (e) => {
       const value = e.target.value;
-      const regex = /[A-Za-z0-9]{3,}/;
-      if (regex.test(value)) {
+      const regexZeroCaracters = /^$/;
+      const regexOneOrTwoCaracters = /[A-Za-z0-9]{1,2}/;
+      const regexThreeCaracters = /[A-Za-z0-9]{3,}/;
+      if (regexThreeCaracters.test(value)) {
         filledListFilter(e.target.value);
+      } else if (regexZeroCaracters.test(value)) {
+        filledListFilter();
+      } else if (regexOneOrTwoCaracters.test(value)) {
+        null;
       }
     });
     filterList.appendChild(input);
@@ -115,10 +121,9 @@ export function filterFactory(data) {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
       const regex = new RegExp(keywordFormated);
-      let matchKeywords = optionArray.filter((o) => {
-        // const oFormated = o.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        // regex.test(oFormated);
-        return regex.test(o.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+      const matchKeywords = optionArray.filter((o) => {
+        const oFormated = o.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return regex.test(oFormated);
       });
       liSection.innerHTML = "";
       matchKeywords.forEach((elt) => {
@@ -130,6 +135,7 @@ export function filterFactory(data) {
         liSection.appendChild(liFilter);
       });
     } else {
+      liSection.innerHTML = "";
       optionArray.forEach((elt) => {
         const liFilter = document.createElement("li");
         liFilter.classList.add("filter_li");
