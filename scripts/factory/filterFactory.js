@@ -184,9 +184,33 @@ export function filterFactory(data) {
     }
   }
 
+  function getFilterDatas(e) {
+    createTag(e.target.innerText);
+    // if (e.target.innerText) {
+    //   const keywordFormated = e.target.innerText
+    //     .toLowerCase()
+    //     .normalize("NFD")
+    //     .replace(/[\u0300-\u036f]/g, "");
+    //   const regex = new RegExp(keywordFormated);
+    //   const matchKeywords = optionArray.filter((o) => {
+    //     const oFormated = o.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    //     return regex.test(oFormated);
+    //   });
+    //   liSection.innerHTML = "";
+    //   matchKeywords.forEach((elt) => {
+    //     const liFilter = document.createElement("li");
+    //     liFilter.classList.add("filter_li");
+    //     const eltFormated = majFirstLetter(elt);
+    //     liFilter.textContent = eltFormated;
+    //     liFilter.addEventListener("click", (e) => filterByKeyword(e));
+    //     liSection.appendChild(liFilter);
+    //   });
+    // }
+  }
+
   function filterByKeyword(e) {
     createTag(e.target.innerText);
   }
 
-  return { getFilterCardDOM };
+  return { getFilterCardDOM, getFilterDatas };
 }
