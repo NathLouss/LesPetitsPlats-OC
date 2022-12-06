@@ -119,5 +119,16 @@ export function recipeFactory(data) {
     return formatedUstensils;
   }
 
-  return { getRecipeCardDOM, getIngredients, getAppliances, getUstensiles };
+  // renvoi les ustensiles d'une recette
+  function getRecipes() {
+    return name, ingredients, description, appliance, ustensils;
+  }
+
+  return {
+    getRecipeCardDOM,
+    getIngredients,
+    getAppliances,
+    getUstensiles,
+    getRecipes,
+  };
 }

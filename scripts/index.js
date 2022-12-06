@@ -4,16 +4,15 @@ import { filterFactory } from "./factory/filterFactory.js";
 import { searchRecipe } from "./utils/searchBar.js";
 
 // déclaration variables
+let datas = [];
 let ingredientsList = [];
 let appliancesList = [];
 let ustensilsList = [];
 let lists = [];
-let filterDatas = [];
 
 // création et affichage des cards recette via la recipeFactory
 function displayRecipes(datas) {
   const recipesSection = document.getElementById("recipes");
-  console.log(datas);
   datas.forEach((data) => {
     let recipeModel = recipeFactory(data);
     const recipeCardDOM = recipeModel.getRecipeCardDOM();
@@ -69,16 +68,15 @@ function groupLists() {
     { Appareils: appliancesList },
     { Ustensiles: ustensilsList },
   ];
-  console.log(lists);
 }
 
 async function init() {
-  const datas = await getRecipes();
+  datas = await getRecipes();
   displayRecipes(datas);
   createListIngredients(datas);
   createListAppliances(datas);
   createListUstensils(datas);
-  groupLists();
+  groupLists(datas);
   displayFilter(lists);
 }
 
@@ -104,7 +102,7 @@ searchBar.addEventListener("input", (e) => {
   const regexOneOrTwoCaracters = /[A-Za-z0-9]{1,2}/;
   const regexThreeCaracters = /[A-Za-z0-9]{3,}/;
   if (regexThreeCaracters.test(value)) {
-    searchRecipe(e.target.value);
+    searchRecipe(e.target.value, datas);
   } else if (regexZeroCaracters.test(value)) {
     searchRecipe();
   } else if (regexOneOrTwoCaracters.test(value)) {
