@@ -1,7 +1,7 @@
 import { getRecipes } from "./api/services.js";
 import { recipeFactory } from "./factory/recipeFactory.js";
 import { filterFactory } from "./factory/filterFactory.js";
-import { searchRecipe } from "./utils/searchBar.js";
+import { filterDatas } from "./utils/searchBar.js";
 
 // déclaration variables
 let datas = [];
@@ -102,9 +102,9 @@ searchBar.addEventListener("input", (e) => {
   const regexOneOrTwoCaracters = /[A-Za-z0-9]{1,2}/;
   const regexThreeCaracters = /[A-Za-z0-9]{3,}/;
   if (regexThreeCaracters.test(value)) {
-    searchRecipe(e.target.value, datas);
+    filterDatas(e.target.value, datas);
   } else if (regexZeroCaracters.test(value)) {
-    searchRecipe();
+    filterDatas();
   } else if (regexOneOrTwoCaracters.test(value)) {
     null;
   }
