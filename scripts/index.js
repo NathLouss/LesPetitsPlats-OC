@@ -9,10 +9,12 @@ let ingredientsList = [];
 let appliancesList = [];
 let ustensilsList = [];
 let lists = [];
+let filteredDatas = [];
 
 // création et affichage des cards recette via la recipeFactory
 function displayRecipes(datas) {
   const recipesSection = document.getElementById("recipes");
+  recipesSection.innerHTML = "";
   datas.forEach((data) => {
     let recipeModel = recipeFactory(data);
     const recipeCardDOM = recipeModel.getRecipeCardDOM();
@@ -98,15 +100,11 @@ function displayFilter(lists) {
 const searchBar = document.querySelector("#search_recipe");
 searchBar.addEventListener("input", (e) => {
   const value = e.target.value;
-  const regexZeroCaracters = /^$/;
-  const regexOneOrTwoCaracters = /[A-Za-z0-9]{1,2}/;
   const regexThreeCaracters = /[A-Za-z0-9]{3,}/;
   if (regexThreeCaracters.test(value)) {
     filterDatas(e.target.value, datas);
-  } else if (regexZeroCaracters.test(value)) {
-    filterDatas();
-  } else if (regexOneOrTwoCaracters.test(value)) {
-    null;
+    filteredDatas = filterDatas(e.target.value, datas);
+    displayRecipes(filteredDatas);
   }
 });
 

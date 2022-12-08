@@ -112,7 +112,8 @@ export function filterDatas(value, datas) {
       }
     }
   }
-  console.log(filteredDatas);
+  // console.log(filteredDatas);
+  return filteredDatas;
 }
 
 // } else if (!(filteredDatas.indexOf(recipe.id) !== -1)) {

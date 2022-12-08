@@ -36,8 +36,9 @@ header {
 #recipes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   row-gap: 50px;
+  column-gap: 5%;
 }
 
 /* RECIPE CARD */
