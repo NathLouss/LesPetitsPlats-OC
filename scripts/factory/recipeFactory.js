@@ -32,9 +32,9 @@ export function recipeFactory(data) {
     header.classList.add("recipe_header");
     content.appendChild(header);
 
-    const h3 = document.createElement("h");
-    h3.textContent = name;
-    header.appendChild(h3);
+    const h2 = document.createElement("h2");
+    h2.textContent = name;
+    header.appendChild(h2);
 
     const timing = document.createElement("div");
     timing.classList.add("recipe_time");
