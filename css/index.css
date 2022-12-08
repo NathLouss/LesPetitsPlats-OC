@@ -3,6 +3,17 @@ header {
   margin-bottom: 20px;
 }
 
+img {
+  width: 60px;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+  font-family: "DM Sans";
+  color: #d04f4f;
+}
+
 #search {
   margin-bottom: 20px;
 }
@@ -26,7 +37,7 @@ header {
 #search_btn_recipe {
   font-size: 32px;
   position: absolute;
-  top: 130px;
+  top: 170px;
   right: 65px;
   border: none;
   background-color: #e7e7e7;
@@ -69,6 +80,7 @@ header {
 }
 
 .recipe_header {
+  text-align: start;
   display: flex;
   justify-content: space-between;
 }
