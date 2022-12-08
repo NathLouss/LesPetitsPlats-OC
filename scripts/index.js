@@ -101,10 +101,20 @@ const searchBar = document.querySelector("#search_recipe");
 searchBar.addEventListener("input", (e) => {
   const value = e.target.value;
   const regexThreeCaracters = /[A-Za-z0-9]{3,}/;
+  const recipesSection = document.getElementById("recipes");
   if (regexThreeCaracters.test(value)) {
-    filterDatas(e.target.value, datas);
     filteredDatas = filterDatas(e.target.value, datas);
     displayRecipes(filteredDatas);
+    displayRecipes(filteredDatas);
+    if (filteredDatas.length === 0) {
+      recipesSection.innerHTML = "Votre recherche n'a pas de correspondance.";
+      recipesSection.classList.add("empty");
+    } else {
+      recipesSection.classList.remove("empty");
+    }
+  } else {
+    displayRecipes(datas);
+    recipesSection.classList.remove("empty");
   }
 });
 
