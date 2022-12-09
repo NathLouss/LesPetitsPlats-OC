@@ -105,7 +105,6 @@ searchBar.addEventListener("input", (e) => {
   if (regexThreeCaracters.test(value)) {
     filteredDatas = filterDatas(e.target.value, datas);
     displayRecipes(filteredDatas);
-    displayRecipes(filteredDatas);
     if (filteredDatas.length === 0) {
       recipesSection.innerHTML = "Votre recherche n'a pas de correspondance.";
       recipesSection.classList.add("empty");
