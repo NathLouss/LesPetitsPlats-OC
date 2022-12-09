@@ -131,7 +131,7 @@ export function filterFactory(data) {
         liFilter.classList.add("filter_li");
         const eltFormated = majFirstLetter(elt);
         liFilter.textContent = eltFormated;
-        liFilter.addEventListener("click", (e) => filterByKeyword(e));
+        liFilter.addEventListener("click", (e) => filterByTag(e));
         liSection.appendChild(liFilter);
       });
     } else {
@@ -141,7 +141,7 @@ export function filterFactory(data) {
         liFilter.classList.add("filter_li");
         const eltFormated = majFirstLetter(elt);
         liFilter.textContent = eltFormated;
-        liFilter.addEventListener("click", (e) => filterByKeyword(e));
+        liFilter.addEventListener("click", (e) => filterByTag(e));
         liSection.appendChild(liFilter);
       });
     }
@@ -184,33 +184,9 @@ export function filterFactory(data) {
     }
   }
 
-  function getFilterDatas(e) {
-    createTag(e.target.innerText);
-    // if (e.target.innerText) {
-    //   const keywordFormated = e.target.innerText
-    //     .toLowerCase()
-    //     .normalize("NFD")
-    //     .replace(/[\u0300-\u036f]/g, "");
-    //   const regex = new RegExp(keywordFormated);
-    //   const matchKeywords = optionArray.filter((o) => {
-    //     const oFormated = o.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    //     return regex.test(oFormated);
-    //   });
-    //   liSection.innerHTML = "";
-    //   matchKeywords.forEach((elt) => {
-    //     const liFilter = document.createElement("li");
-    //     liFilter.classList.add("filter_li");
-    //     const eltFormated = majFirstLetter(elt);
-    //     liFilter.textContent = eltFormated;
-    //     liFilter.addEventListener("click", (e) => filterByKeyword(e));
-    //     liSection.appendChild(liFilter);
-    //   });
-    // }
-  }
-
-  function filterByKeyword(e) {
+  function filterByTag(e) {
     createTag(e.target.innerText);
   }
 
-  return { getFilterCardDOM, getFilterDatas };
+  return { getFilterCardDOM };
 }

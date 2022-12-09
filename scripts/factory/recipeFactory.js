@@ -1,14 +1,5 @@
 export function recipeFactory(data) {
-  const {
-    id,
-    name,
-    servings,
-    ingredients,
-    time,
-    description,
-    appliance,
-    ustensils,
-  } = data;
+  const { name, ingredients, time, description, appliance, ustensils } = data;
 
   // renvoi l'élément HTML d'une recette
   function getRecipeCardDOM() {
