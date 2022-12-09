@@ -117,16 +117,3 @@ searchBar.addEventListener("input", (e) => {
     recipesSection.classList.remove("empty");
   }
 });
-
-//------------------------------------------------------------------------------------------
-// manipule 4 listes : recettes, ingrédients, appareils, ustensiles
-// 4 arrays
-// selon les filtres on va reconstruire ces tableaux
-// ces tableaux seront envoyés aux fonctions qui affiche les recettes, le contenu du filtre
-// array.filter reconstruit le tableau
-// return operation ternaire
-
-// boucle en 1er
-// loqigue tri : dans un nvo tableau prend la 1ere variable et une seconde
-
-//------------------------------------------------------------------------------------------
