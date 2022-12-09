@@ -84,7 +84,7 @@ export function filterDatas(value, datas) {
   return filteredDatas;
 }
 
-function sortDatas(array, key) {
+export function sortDatas(array, key) {
   for (let i = 0; i < array.length; i++) {
     const currVal = array[i][key];
     const currElem = array[i];

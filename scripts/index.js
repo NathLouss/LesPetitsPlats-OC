@@ -1,7 +1,7 @@
 import { getRecipes } from "./api/services.js";
 import { recipeFactory } from "./factory/recipeFactory.js";
 import { filterFactory } from "./factory/filterFactory.js";
-import { filterDatas } from "./utils/searchBar.js";
+import { filterDatas, sortDatas } from "./utils/searchBar.js";
 
 // déclaration variables
 let datas = [];
@@ -13,6 +13,7 @@ let filteredDatas = [];
 
 // création et affichage des cards recette via la recipeFactory
 function displayRecipes(datas) {
+  sortDatas(datas, `name`);
   const recipesSection = document.getElementById("recipes");
   recipesSection.innerHTML = "";
   datas.forEach((data) => {
