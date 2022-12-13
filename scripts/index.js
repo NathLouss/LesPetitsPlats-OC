@@ -2,6 +2,7 @@ import { getRecipes } from "./api/services.js";
 import { recipeFactory } from "./factory/recipeFactory.js";
 import { filterFactory } from "./factory/filterFactory.js";
 import { filterDatas, sortDatas } from "./utils/searchBar.js";
+import { handleTag } from "./utils/tag.js";
 
 // déclaration variables
 let datas = [];
@@ -99,6 +100,9 @@ function displayFilter(lists) {
     const filterCardDOM = filterModel.getFilterCardDOM();
     filtersSection.appendChild(filterCardDOM);
   });
+  debugger;
+  const filterLi = document.querySelectorAll(".filters_li");
+  filterLi.forEach((li) => li.addEventListener("click", (e) => handleTag(e)));
 }
 
 //------------------------------------------------------------------------------------------
