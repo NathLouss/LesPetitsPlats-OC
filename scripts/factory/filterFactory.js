@@ -112,9 +112,23 @@ export function filterFactory(data) {
     return (elt + "").charAt(0).toUpperCase() + elt.substr(1);
   }
 
+  // création de l'élément HTML d'une liste de filtre
+  function createFilterListElt(options) {
+    const liSection = document.getElementById(`filter_list_${selectedFilter}`);
+    options.forEach((elt) => {
+      const liFilter = document.createElement("li");
+      liFilter.classList.add("filter_li");
+      const eltFormated = majFirstLetter(elt);
+      liFilter.textContent = eltFormated;
+      liFilter.addEventListener("click", (e) => filterByTag(e));
+      liSection.appendChild(liFilter);
+    });
+  }
+
   // rempli la liste des filtres selon avec ou sans saisie dans input
   function filledListFilter(keyword = null) {
     const liSection = document.getElementById(`filter_list_${selectedFilter}`);
+    liSection.innerHTML = "";
     if (keyword) {
       const keywordFormated = keyword
         .toLowerCase()
@@ -125,27 +139,18 @@ export function filterFactory(data) {
         const oFormated = o.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         return regex.test(oFormated);
       });
-      liSection.innerHTML = "";
-      matchKeywords.forEach((elt) => {
-        const liFilter = document.createElement("li");
-        liFilter.classList.add("filter_li");
-        const eltFormated = majFirstLetter(elt);
-        liFilter.textContent = eltFormated;
-        liFilter.addEventListener("click", (e) =>
-          filterByTag(e, matchKeywords)
-        );
-        liSection.appendChild(liFilter);
-      });
+      createFilterListElt(matchKeywords);
     } else {
-      liSection.innerHTML = "";
-      optionArray.forEach((elt) => {
-        const liFilter = document.createElement("li");
-        liFilter.classList.add("filter_li");
-        const eltFormated = majFirstLetter(elt);
-        liFilter.textContent = eltFormated;
-        liFilter.addEventListener("click", (e) => filterByTag(e));
-        liSection.appendChild(liFilter);
-      });
+      const inputSearchBar = document.getElementById("search_recipe");
+      if (inputSearchBar.className === "active") {
+        const searchValue = inputSearchBar.value;
+        const newOptionArray = optionArray.filter(
+          (option) => !option.toString().includes(searchValue)
+        );
+        createFilterListElt(newOptionArray);
+      } else {
+        createFilterListElt(optionArray);
+      }
     }
   }
 
@@ -192,3 +197,23 @@ export function filterFactory(data) {
 
   return { getFilterCardDOM };
 }
+
+// const tagSection = document.querySelector(".filters_tags_active");
+// if (tagSection) {
+//   const tags = document.querySelectorAll(".filter_tag_p");
+//   let tagList = [];
+//   const tagContent = tags.forEach((tag) => tagList.push(tag.textContent));
+//   debugger;
+//   const newOptionArray = optionArray.filter(
+//     (option) => !option.toString().includes(searchValue)
+//   );
+//   console.log(newOptionArray);
+//   liSection.innerHTML = "";
+//   newOptionArray.forEach((elt) => {
+//     const liFilter = document.createElement("li");
+//     liFilter.classList.add("filter_li");
+//     const eltFormated = majFirstLetter(elt);
+//     liFilter.textContent = eltFormated;
+//     liFilter.addEventListener("click", (e) => filterByTag(e));
+//     liSection.appendChild(liFilter);
+//   });

@@ -101,31 +101,6 @@ function displayFilter(lists) {
   });
 }
 
-function removeKeywordFromList(value, lists) {
-  const eFormated = value
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-  const regex = new RegExp(eFormated);
-  lists.forEach((list) =>
-    Object.values(list).forEach((eList) => {
-      eList.find((e, index) => {
-        console.log(e.value);
-        let indexUtd = index;
-        if (regex.test(e)) {
-          eList.splice(indexUtd, 1);
-          indexUtd--;
-        }
-      });
-    })
-  );
-  return lists;
-}
-// const k = Object.keys(list);
-// console.log(typeof k, k);
-// list = eList.filter((e) => !regex.test(e));
-// console.log(lists.k);
-
 //------------------------------------------------------------------------------------------
 // Event Listener
 const searchBar = document.querySelector("#search_recipe");
@@ -134,10 +109,10 @@ searchBar.addEventListener("input", (e) => {
   const regexThreeCaracters = /[A-Za-z0-9]{3,}/;
   const recipesSection = document.getElementById("recipes");
   if (regexThreeCaracters.test(value)) {
+    searchBar.classList.add("active");
     filteredDatas = filterDatas(e.target.value, datas);
     displayRecipes(filteredDatas);
     listInit(filteredDatas);
-    removeKeywordFromList(value, lists);
     displayFilter(lists);
     if (filteredDatas.length === 0) {
       recipesSection.innerHTML = "Votre recherche n'a pas de correspondance.";
@@ -146,6 +121,7 @@ searchBar.addEventListener("input", (e) => {
       recipesSection.classList.remove("empty");
     }
   } else {
+    searchBar.classList.remove("active");
     displayRecipes(datas);
     listInit(datas);
     displayFilter(lists);
