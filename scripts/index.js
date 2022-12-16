@@ -2,7 +2,7 @@ import { getRecipes } from './api/services.js'
 import { recipeFactory } from './factory/recipeFactory.js'
 import { filterFactory } from './factory/filterFactory.js'
 import { filterDatas, sortDatas } from './utils/filterAlgo.js'
-// import { handleTag } from "./utils/tag.js";
+import { handleTag } from './utils/tag.js'
 
 // déclaration variables
 let datas = []
@@ -12,7 +12,6 @@ let ustensilsList = []
 let lists = []
 let filteredDatas = []
 
-// création et affichage des cards recette via la recipeFactory
 function displayRecipes(datas) {
 	sortDatas(datas)
 	const recipesSection = document.getElementById('recipes')
@@ -23,6 +22,7 @@ function displayRecipes(datas) {
 		recipesSection.appendChild(recipeCardDOM)
 	})
 }
+// création et affichage des cards recette via la recipeFactory
 
 // création liste ingrédients via la recipeFactory
 function createListIngredients(datas) {
@@ -89,9 +89,18 @@ function displayFilter(lists) {
 		let filterModel = filterFactory(list)
 		const filterCardDOM = filterModel.getFilterCardDOM()
 		filtersSection.appendChild(filterCardDOM)
+
+		const liFilterArray = filterModel.liFilterArray
+		console.log(liFilterArray)
+		const selectedFilter = filterModel.selectedFilter
+		console.log(selectedFilter)
+		const liSection = document.getElementById(`filter_list_${selectedFilter}`)
+		debugger
+		liFilterArray.forEach((li) => {
+			li.appendChild(liSection)
+			li.addEventListener('click', (e) => handleTag(e))
+		})
 	})
-	// const filterLi = document.querySelectorAll(".filters_li");
-	// filterLi.forEach((li) => li.addEventListener("click", (e) => handleTag(e)));
 }
 
 async function init() {
@@ -130,26 +139,3 @@ searchBar.addEventListener('input', (e) => {
 		recipesSection.classList.remove('empty')
 	}
 })
-
-//------------------------------------------------------------------------------------------
-// Gestion des tags
-async function getTags() {
-	let promise = new Promise((resolve) => {
-		if (document.querySelector('.filters_tags_active')) {
-			const tags = document.querySelectorAll('.filter_tag_p')
-			const tagList = tags.forEach((tag) => tagList.push(tag.textContent))
-			return resolve(tagList)
-		}
-	})
-
-	let result = await promise
-
-	return result
-}
-
-async function initTags() {
-	let tagList = await getTags()
-	filterDatas(tagList, datas)
-}
-
-initTags()
