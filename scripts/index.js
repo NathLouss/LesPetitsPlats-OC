@@ -89,17 +89,25 @@ function displayFilter(lists) {
 		let filterModel = filterFactory(list)
 		const filterCardDOM = filterModel.getFilterCardDOM()
 		filtersSection.appendChild(filterCardDOM)
+	})
+}
 
-		const liFilterArray = filterModel.liFilterArray
-		console.log(liFilterArray)
-		const selectedFilter = filterModel.selectedFilter
-		console.log(selectedFilter)
-		const liSection = document.getElementById(`filter_list_${selectedFilter}`)
-		debugger
-		liFilterArray.forEach((li) => {
-			li.appendChild(liSection)
-			li.addEventListener('click', (e) => handleTag(e))
-		})
+//génération des listes de filtres via la filterFactory
+function generateLiFilter(lists) {
+	const selectedFilter = filterModel.selectedFilter
+	console.log(selectedFilter)
+	const liSection = document.getElementById(`filter_list_${selectedFilter}`)
+	lists.forEach((list) => {
+		let filterModel = filterFactory(list)
+		const filterCardDOM = filterModel.filledListFilter()
+		liSection.appendChild(filterCardDOM)
+	})
+	const liFilterArray = filterModel.liFilterArray
+	console.log(liFilterArray)
+	debugger
+	liFilterArray.forEach((li) => {
+		li.appendChild(liSection)
+		li.addEventListener('click', (e) => handleTag(e))
 	})
 }
 
@@ -108,6 +116,7 @@ async function init() {
 	displayRecipes(datas)
 	listInit(datas)
 	displayFilter(lists)
+	generateLiFilter(lists)
 }
 
 init()

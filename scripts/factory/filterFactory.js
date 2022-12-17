@@ -24,7 +24,7 @@ export function filterFactory(data) {
 		btn.classList.add('filter_btn')
 		btn.addEventListener('click', (e) => {
 			toggleDropDown(e)
-			filledListFilter()
+			// filledListFilter()
 		})
 		filter.appendChild(btn)
 
