@@ -12,6 +12,7 @@ export function filterFactory(data) {
 	const optionValue = Object.values(option)
 	const optionArray = optionValue[0]
 	let liFilterArray = []
+	console.log(typeof optionValue, optionValue)
 
 	// renvoi l'élément HTML d'un filtre
 	function getFilterCardDOM() {
@@ -24,7 +25,7 @@ export function filterFactory(data) {
 		btn.classList.add('filter_btn')
 		btn.addEventListener('click', (e) => {
 			toggleDropDown(e)
-			// filledListFilter()
+			filledListFilter()
 		})
 		filter.appendChild(btn)
 
@@ -105,7 +106,7 @@ export function filterFactory(data) {
 
 	// création de l'élément HTML d'une liste de filtre
 	function createFilterListElt(options) {
-		// const liSection = document.getElementById(`filter_list_${selectedFilter}`)
+		const liSection = document.getElementById(`filter_list_${selectedFilter}`)
 		options.forEach((elt) => {
 			const liFilter = document.createElement('li')
 			liFilter.classList.add('filter_li')
@@ -113,9 +114,10 @@ export function filterFactory(data) {
 			liFilter.textContent = eltFormated
 			liFilterArray.push(liFilter)
 			// liFilter.addEventListener('click', (e) => handleTag(e))
-			// liSection.appendChild(liFilter)
+			liSection.appendChild(liFilter)
 		})
 		console.log(liFilterArray)
+		return liFilterArray
 	}
 
 	// rempli la liste des filtres selon avec ou sans saisie dans input
