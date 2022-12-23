@@ -23,6 +23,7 @@ function updateListFilter(keyword = null, optionArray, list) {
 	const liSection = document.getElementById(`filter_list_${selectedFilter}`)
 	liSection.remove()
 	console.log(optionArray)
+	// vérifier searchbar pour  toutes les options
 	if (keyword) {
 		const keywordFormated = keyword
 			.toLowerCase()
@@ -37,6 +38,7 @@ function updateListFilter(keyword = null, optionArray, list) {
 		initFilterList(matchKeywords, list)
 	} else {
 		const inputSearchBar = document.getElementById('search_recipe')
+		// vérifier value
 		if (inputSearchBar.className === 'active') {
 			const searchValue = inputSearchBar.value
 			const newOptionArray = optionArray.filter(

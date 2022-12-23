@@ -75,6 +75,14 @@ function groupLists() {
 	]
 }
 
+lists = {
+	Ingrédients: ingredientsList,
+	Appareils: appliancesList,
+	Ustensiles: ustensilsList,
+}
+console.log(lists)
+// sans maj ingredients:
+
 function listInit(datas) {
 	createListIngredients(datas)
 	createListAppliances(datas)
