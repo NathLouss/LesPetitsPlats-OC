@@ -74,17 +74,17 @@
   background-color: #3282f7;
 }
 
-#filter_btn_appareil,
-#input_appareil,
-#filter_list_appareil,
-.color_tag_appareil {
+#filter_btn_appliance,
+#input_appliance,
+#filter_list_appliance,
+.color_tag_appliance {
   background-color: #68d9a4;
 }
 
-#filter_btn_ustensile,
-#input_ustensile,
-#filter_list_ustensile,
-.color_tag_ustensile {
+#filter_btn_ustensil,
+#input_ustensil,
+#filter_list_ustensil,
+.color_tag_ustensil {
   background-color: #ed6454;
 }
 
