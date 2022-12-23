@@ -1,6 +1,6 @@
 import { filterFactory } from '../factory/filterFactory.js'
 
-export function handleFilterList(e, optionArray, list) {
+export function initFilterList(e, optionArray, list) {
 	const value = e.target.value
 	const regexZeroCaracters = /^$/
 	const regexOneOrTwoCaracters = /[A-Za-z0-9]{1,2}/
@@ -51,16 +51,16 @@ function updateListFilter(keyword = null, optionArray, list) {
 	}
 }
 
-function initFilterList(optionArray, list) {
-	debugger
-	console.log(optionArray)
-	let filterListModel = filterFactory(list)
-	const filterListCardDOM = filterListModel.getFilterListCardDOM(optionArray)
-	const selectedFilter = filterListModel.selectedFilter
-	const liSection = document.getElementById(`filter_by_${selectedFilter}`)
-	const liFilter = filterListModel.liFilterArray
-	liFilter.forEach((li) => {
-		li.addEventListener('click', (e) => handleTag(e, selectedFilter))
-	})
-	liSection.appendChild(filterListCardDOM)
-}
+// function initFilterList(optionArray, list) {
+// 	debugger
+// 	console.log(optionArray)
+// 	let filterListModel = filterFactory(list)
+// 	const filterListCardDOM = filterListModel.getFilterListCardDOM(optionArray)
+// 	const selectedFilter = filterListModel.selectedFilter
+// 	const liSection = document.getElementById(`filter_by_${selectedFilter}`)
+// 	const liFilter = filterListModel.liFilterArray
+// 	liFilter.forEach((li) => {
+// 		li.addEventListener('click', (e) => handleTag(e, selectedFilter))
+// 	})
+// 	liSection.appendChild(filterListCardDOM)
+// }
