@@ -165,4 +165,5 @@
 .filter_li {
   color: white;
   width: 150px;
+  cursor: pointer;
 }

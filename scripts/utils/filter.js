@@ -1,22 +1,22 @@
-import { filterFactory } from '../factory/filterFactory.js'
+// import { filterFactory } from '../factory/filterFactory.js'
 
-export function initFilterList(e, optionArray, list) {
-	const value = e.target.value
-	const regexZeroCaracters = /^$/
-	const regexOneOrTwoCaracters = /[A-Za-z0-9]{1,2}/
-	const regexThreeCaracters = /[A-Za-z0-9]{3,}/
-	// console.log(typeof optionArray, optionArray)
-	// console.log(typeof optionArray[0], optionArray[0])
-	// console.log(typeof optionArray['0'], optionArray['0'])
-	// console.log(typeof Object.values(optionArray), Object.values(optionArray))
-	if (regexThreeCaracters.test(value)) {
-		updateListFilter(e.target.value, optionArray[0], list)
-	} else if (regexZeroCaracters.test(value)) {
-		updateListFilter(optionArray[0], list)
-	} else if (regexOneOrTwoCaracters.test(value)) {
-		null
-	}
-}
+// export function initFilterList(e, optionArray, list) {
+// 	const value = e.target.value
+// 	const regexZeroCaracters = /^$/
+// 	const regexOneOrTwoCaracters = /[A-Za-z0-9]{1,2}/
+// 	const regexThreeCaracters = /[A-Za-z0-9]{3,}/
+// 	// console.log(typeof optionArray, optionArray)
+// 	// console.log(typeof optionArray[0], optionArray[0])
+// 	// console.log(typeof optionArray['0'], optionArray['0'])
+// 	// console.log(typeof Object.values(optionArray), Object.values(optionArray))
+// 	if (regexThreeCaracters.test(value)) {
+// 		updateListFilter(e.target.value, optionArray[0], list)
+// 	} else if (regexZeroCaracters.test(value)) {
+// 		updateListFilter(optionArray[0], list)
+// 	} else if (regexOneOrTwoCaracters.test(value)) {
+// 		null
+// 	}
+// }
 
 function updateListFilter(keyword = null, optionArray, list) {
 	const selectedFilter = document.querySelector('.filter_input_active').dataset.property
