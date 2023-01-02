@@ -1,4 +1,4 @@
-// récupération des recettes \
+// récupération des recettes
 export async function getRecipes() {
 	try {
 		const response = await fetch('scripts/datas/recipes.json')
