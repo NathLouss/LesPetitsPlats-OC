@@ -4,7 +4,7 @@ import { filterFactory } from './factory/filterFactory.js'
 import { filterDatas, sortDatas } from './utils/filterAlgo.js'
 import { toggleDropDown } from './utils/dropdown.js'
 // import { initFilterList } from './utils/filter.js'
-import { handleTag } from './utils/tag.js'
+import { createTag } from './utils/tag.js'
 
 // déclaration variables
 let datas = []
@@ -90,8 +90,9 @@ function displayFilterList(lists, keyword = null, source = null) {
 		const ulSection = document.getElementById(`filter_list_${key}`)
 		ulSection.innerHTML = ''
 		if (keyword) {
+			// si argument keyword transmis (input)
 			if (source) {
-				// si argument keyword transmis (input)
+				// si source filtre
 				const keywordFormated = keyword
 					.toLowerCase()
 					.normalize('NFD')
@@ -108,7 +109,7 @@ function displayFilterList(lists, keyword = null, source = null) {
 				let filterListModel = filterFactory(newValuesList)
 				const filterListCardDOM = filterListModel.getFilterListCardDOM()
 				Object.values(filterListCardDOM).forEach((li) => {
-					li.addEventListener('click', (e) => handleTag(e, key))
+					li.addEventListener('click', (e) => createTag(e, key))
 					ulSection.appendChild(li)
 				})
 			} else {
@@ -129,7 +130,7 @@ function displayFilterList(lists, keyword = null, source = null) {
 				let filterListModel = filterFactory(newValuesList)
 				const filterListCardDOM = filterListModel.getFilterListCardDOM()
 				Object.values(filterListCardDOM).forEach((li) => {
-					li.addEventListener('click', (e) => handleTag(e, key))
+					li.addEventListener('click', (e) => createTag(e, key))
 					ulSection.appendChild(li)
 				})
 			}
@@ -139,7 +140,13 @@ function displayFilterList(lists, keyword = null, source = null) {
 			let filterListModel = filterFactory(value)
 			const filterListCardDOM = filterListModel.getFilterListCardDOM()
 			Object.values(filterListCardDOM).forEach((li) => {
-				li.addEventListener('click', (e) => handleTag(e, key))
+				li.addEventListener('click', (e) => {
+					createTag(e, key)
+					filteredDatas = filterDatas(e.target.value, datas)
+					displayRecipes(filteredDatas)
+					listInit(filteredDatas)
+					displayFilterList(lists, value, sourceValue)
+				})
 				ulSection.appendChild(li)
 			})
 		}
