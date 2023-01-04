@@ -203,6 +203,18 @@ searchBar.addEventListener('input', (e) => {
 	const value = e.target.value
 	const recipesSection = document.getElementById('recipes')
 	if (value.length >= 3) {
+		const form = document.querySelector('form')
+		const crossBtn = document.createElement('button')
+		crossBtn.classList.add('search_btn_cross')
+		crossBtn.addEventListener('click', (e) => {
+			console.log(value)
+			value.replace('')
+		})
+		form.appendChild(crossBtn)
+		const crossIcon = document.createElement('i')
+		crossIcon.classList.add('cross', 'fas', 'fa-times')
+		crossBtn.appendChild(crossIcon)
+
 		searchBar.classList.add('active') /** rajouter un style */
 		filteredRecipes = filterRecipes(e.target.value, recipes) // filtre les recettes avec la value de l'input
 		displayRecipes(filteredRecipes) // affiche les recettes filtrées
