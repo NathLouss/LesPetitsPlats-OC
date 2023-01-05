@@ -13,6 +13,7 @@ let appliancesList = []
 let ustensilsList = []
 let lists = []
 let filteredRecipes = []
+const form = document.querySelector('form')
 
 // création et affichage des cards recette via la recipeFactory
 function displayRecipes(recipes) {
@@ -199,24 +200,15 @@ inputs.forEach((input) =>
 //------------------------------------------------------------------------------------------
 // Event Listener
 const searchBar = document.querySelector('#search_recipe')
+let executed = false
 searchBar.addEventListener('input', (e) => {
 	const value = e.target.value
 	const recipesSection = document.getElementById('recipes')
 	if (value.length >= 3) {
-		const form = document.querySelector('form')
-		const crossBtn = document.createElement('button')
-		crossBtn.classList.add('search_btn_cross')
-		crossBtn.addEventListener('click', (e) => {
-			console.log(value)
-			value.replace('')
-		})
-		form.appendChild(crossBtn)
-		const crossIcon = document.createElement('i')
-		crossIcon.classList.add('cross', 'fas', 'fa-times')
-		crossBtn.appendChild(crossIcon)
-
+		initResetInput()
 		searchBar.classList.add('active') /** rajouter un style */
 		filteredRecipes = filterRecipes(e.target.value, recipes) // filtre les recettes avec la value de l'input
+		form.insertAdjacentHTML('beforeend', `${filteredRecipes.length} recettes correspondantes`)
 		displayRecipes(filteredRecipes) // affiche les recettes filtrées
 		listInit(filteredRecipes) // réinitialise les listes ingr, app, ustens avec les recettes filtrées
 		displayFilterList(lists, value) // filtre et affiche les listes les listes des recettes filtrées
@@ -227,11 +219,29 @@ searchBar.addEventListener('input', (e) => {
 			recipesSection.classList.remove('empty')
 		}
 	} else {
-		searchBar.classList.remove('active')
-		// displayRecipes(recipes)
-		// listInit(recipes)
-		// displayFilterList(lists)
 		init()
+		searchBar.classList.remove('active')
 		recipesSection.classList.remove('empty')
 	}
 })
+
+// croix pour réinitialiser l'input
+function initResetInput() {
+	// debugger
+	// crossBtn.remove()
+	if (!executed) {
+		const crossBtn = document.createElement('button')
+		crossBtn.classList.add('search_btn_cross')
+		crossBtn.addEventListener('click', () => {
+			form.reset()
+			searchBar.classList.remove('active')
+			crossBtn.remove()
+		})
+		form.appendChild(crossBtn)
+		const crossIcon = document.createElement('i')
+		crossIcon.classList.add('cross', 'fas', 'fa-times')
+		crossBtn.appendChild(crossIcon)
+
+		executed = true
+	}
+}
