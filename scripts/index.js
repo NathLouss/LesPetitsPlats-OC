@@ -200,7 +200,6 @@ inputs.forEach((input) =>
 //------------------------------------------------------------------------------------------
 // Event Listener
 const searchBar = document.querySelector('#search_recipe')
-let executed = false
 searchBar.addEventListener('input', (e) => {
 	const value = e.target.value
 	const recipesSection = document.getElementById('recipes')
@@ -208,7 +207,7 @@ searchBar.addEventListener('input', (e) => {
 		initResetInput()
 		searchBar.classList.add('active') /** rajouter un style */
 		filteredRecipes = filterRecipes(e.target.value, recipes) // filtre les recettes avec la value de l'input
-		form.insertAdjacentHTML('beforeend', `${filteredRecipes.length} recettes correspondantes`)
+		document.querySelector('.search_recipe_number').textContent = filteredRecipes.length
 		displayRecipes(filteredRecipes) // affiche les recettes filtrées
 		listInit(filteredRecipes) // réinitialise les listes ingr, app, ustens avec les recettes filtrées
 		displayFilterList(lists, value) // filtre et affiche les listes les listes des recettes filtrées
@@ -222,26 +221,24 @@ searchBar.addEventListener('input', (e) => {
 		init()
 		searchBar.classList.remove('active')
 		recipesSection.classList.remove('empty')
+		const cross = document.querySelector('.search_btn_cross')
+		cross.style.display = 'none'
+		document.querySelector('.search_recipe_number').textContent = '50'
 	}
 })
 
 // croix pour réinitialiser l'input
 function initResetInput() {
-	// debugger
-	// crossBtn.remove()
-	if (!executed) {
-		const crossBtn = document.createElement('button')
-		crossBtn.classList.add('search_btn_cross')
-		crossBtn.addEventListener('click', () => {
-			form.reset()
-			searchBar.classList.remove('active')
-			crossBtn.remove()
-		})
-		form.appendChild(crossBtn)
-		const crossIcon = document.createElement('i')
-		crossIcon.classList.add('cross', 'fas', 'fa-times')
-		crossBtn.appendChild(crossIcon)
-
-		executed = true
-	}
+	const cross = document.querySelector('.search_btn_cross')
+	cross.style.display = 'block'
+	cross.addEventListener('click', () => {
+		form.reset()
+		searchBar.classList.remove('active')
+		cross.style.display = 'none'
+		init()
+		searchBar.classList.remove('active')
+		const recipesSection = document.getElementById('recipes')
+		recipesSection.classList.remove('empty')
+		document.querySelector('.search_recipe_number').textContent = '50'
+	})
 }
