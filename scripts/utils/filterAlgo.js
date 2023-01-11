@@ -1,48 +1,48 @@
-let filteredDatas = []
+let filteredRecipes = []
 
-export function filterDatas(value, datas) {
-	filteredDatas.innerHTML = ''
+export function filterRecipes(value, recipes) {
+	filteredRecipes.innerHTML = ''
 	const inputFormated = value
 		.toLowerCase()
 		.normalize('NFD')
 		.replace(/[\u0300-\u036f]/g, '')
-	filteredDatas = datas.filter(
-		(data) =>
-			data.name
+	filteredRecipes = recipes.filter(
+		(recipe) =>
+			recipe.name
 				.toLowerCase()
 				.normalize('NFD')
 				.replace(/[\u0300-\u036f]/g, '')
 				.includes(inputFormated) ||
-			data.ingredients
+			recipe.ingredients
 				.map((ingredients) => ingredients.ingredient)
 				.toString()
 				.toLowerCase()
 				.normalize('NFD')
 				.replace(/[\u0300-\u036f]/g, '')
 				.includes(inputFormated) ||
-			data.description
+			recipe.description
 				.toLowerCase()
 				.normalize('NFD')
 				.replace(/[\u0300-\u036f]/g, '')
 				.includes(inputFormated) ||
-			data.appliance
+			recipe.appliance
 				.toLowerCase()
 				.normalize('NFD')
 				.replace(/[\u0300-\u036f]/g, '')
 				.includes(inputFormated) ||
-			data.ustensils
+			recipe.ustensils
 				.toString()
 				.toLowerCase()
 				.normalize('NFD')
 				.replace(/[\u0300-\u036f]/g, '')
 				.includes(inputFormated)
 	)
-	sortDatas(filteredDatas)
-	return filteredDatas
+	sortRecipes(filteredRecipes)
+	return filteredRecipes
 }
 
-export function sortDatas(filteredDatas) {
-	filteredDatas.sort(function (a, b) {
+export function sortRecipes(filteredRecipes) {
+	filteredRecipes.sort(function (a, b) {
 		let x = a.name.toLowerCase()
 		let y = b.name.toLowerCase()
 		if (x > y) {
@@ -53,5 +53,5 @@ export function sortDatas(filteredDatas) {
 		}
 		return 0
 	})
-	return filteredDatas
+	return filteredRecipes
 }
