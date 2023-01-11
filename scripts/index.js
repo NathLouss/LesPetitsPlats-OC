@@ -3,7 +3,7 @@ import { recipeFactory } from './factory/recipeFactory.js'
 import { filterFactory } from './factory/filterFactory.js'
 import { filterRecipes, sortRecipes } from './utils/filterAlgo.js'
 import { toggleDropDown } from './utils/dropdown.js'
-import { createTag } from './utils/tag.js'
+import { filterByTag } from './utils/tag.js'
 
 // déclaration variables
 let recipes = []
@@ -12,6 +12,7 @@ let appliancesList = []
 let ustensilsList = []
 let lists = []
 let filteredRecipes = []
+export let searchBarKeyword = []
 
 // création et affichage des cards recette via la recipeFactory
 function displayRecipes(recipes) {
@@ -75,7 +76,7 @@ function groupLists() {
 	}
 }
 
-function listInit(recipes) {
+export function listInit(recipes) {
 	createListIngredients(recipes)
 	createListAppliances(recipes)
 	createListUstensils(recipes)
@@ -97,7 +98,7 @@ function displayFilterList(lists, keyword = null) {
 			// on postionne un eventlistener sur chaque option de filtre li
 			Object.values(filterListCardDOM).forEach((li) => {
 				li.addEventListener('click', (e) => {
-					createTag(e, filterName)
+					filterByTag(e, filterName, recipes)
 				})
 				ulSection.appendChild(li)
 			})
@@ -121,7 +122,7 @@ function displayFilterList(lists, keyword = null) {
 			// on postionne un eventlistener sur chaque option de filtre li
 			Object.values(filterListCardDOM).forEach((li) => {
 				li.addEventListener('click', (e) => {
-					createTag(e, filterName)
+					filterByTag(e, filterName, recipes)
 				})
 				ulSection.appendChild(li)
 			})
@@ -167,6 +168,9 @@ searchBar.addEventListener('input', (e) => {
 		listInit(filteredRecipes)
 		// affiche les listes des recettes filtrées
 		displayFilterList(lists, value)
+		// stock recherche saisie
+		searchBarKeyword = []
+		searchBarKeyword.push(value)
 
 		if (filteredRecipes.length === 0) {
 			recipesSection.innerHTML = "Votre recherche n'a pas de correspondance."
@@ -180,6 +184,8 @@ searchBar.addEventListener('input', (e) => {
 		recipesSection.classList.remove('empty')
 		cross.style.display = 'none'
 		document.querySelector('.search_recipe_number').textContent = '50'
+		// reset recherche saisie
+		searchBarKeyword = []
 	}
 })
 
@@ -204,10 +210,11 @@ const inputsFilter = document.querySelectorAll('.filter_input')
 inputsFilter.forEach((input) =>
 	input.addEventListener('input', (e) => {
 		const filterValue = e.target.value
+		const filterProperty = e.target.dataset.property
 		if (filterValue.length >= 3) {
-			initResetInput(e.target.dataset.property)
+			initResetInput(filterProperty)
 			// récupère les li existants
-			const ulSection = document.getElementById(`filter_list_${e.target.dataset.property}`)
+			const ulSection = document.getElementById(`filter_list_${filterProperty}`)
 			const liSectionList = ulSection.childNodes
 			const keywordFormated = filterValue
 				.toLowerCase()
@@ -233,7 +240,7 @@ inputsFilter.forEach((input) =>
 				liFilter.textContent = eltFormated
 				// on postionne un eventlistener sur chaque option de filtre li
 				liFilter.addEventListener('click', (e) => {
-					createTag(e, e.target.dataset.property)
+					filterByTag(e, filterProperty, recipes)
 				})
 				ulSection.appendChild(liFilter)
 			})
