@@ -358,6 +358,14 @@ function filterByKeyword(recipes, globalKeyword) {
 			// affiche les listes des recettes filtrées
 			displayFilterList(lists)
 		})
+
+		document.querySelectorAll('.filter_li').forEach((li) => {
+			globalKeyword.forEach((keyword) => {
+				if (keyword == li.textContent) {
+					li.classList.add('selected')
+				}
+			})
+		})
 	} else {
 		init()
 		document.querySelector('.search_recipe_number').textContent = '50'
