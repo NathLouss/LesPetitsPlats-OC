@@ -54,6 +54,7 @@ export function recipeFactory(recipe) {
 
 		ingredients.forEach((ingredient) => {
 			const food = document.createElement('li')
+			food.classList.add('li_recipe')
 
 			const foodIngd = document.createElement('p')
 			foodIngd.classList.add('recipe_ingredient')
@@ -76,7 +77,7 @@ export function recipeFactory(recipe) {
 
 		const descriptionText = document.createElement('p')
 		descriptionText.classList.add('recipe_description_text')
-		descriptionText.textContent = description
+		descriptionText.textContent = description.slice(0, 150) + '...'
 		recipeDescription.appendChild(descriptionText)
 
 		return card

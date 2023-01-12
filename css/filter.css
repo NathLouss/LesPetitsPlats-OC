@@ -67,7 +67,6 @@
   position: relative;
 }
 
-
 #filter_btn_ingredient,
 #input_ingredient,
 #filter_list_ingredient,
@@ -149,25 +148,21 @@
   overflow-x: scroll;
 }
 
-/* width */
-::-webkit-scrollbar {
+.scrollbar::-webkit-scrollbar {
   width: 5px;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
+.scrollbar::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px rgb(255, 254, 254);
   border-radius: 10px;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
+.scrollbar::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.562);
   border-radius: 10px;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+.scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.795);
 }
 
