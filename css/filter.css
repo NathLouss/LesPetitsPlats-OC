@@ -54,7 +54,6 @@
   position: relative;
 }
 
-/* filter_list >> filter_form */
 .filter_btn,
 .filter_form {
   color: white;
@@ -67,6 +66,7 @@
   z-index: 1;
   position: relative;
 }
+
 
 #filter_btn_ingredient,
 #input_ingredient,
@@ -134,7 +134,6 @@
   right: 15px;
 }
 
-/* list_option >> filter_list */
 .filter_list{
   display: none;
   flex-direction: column;
