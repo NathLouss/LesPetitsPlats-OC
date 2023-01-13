@@ -197,6 +197,18 @@ function initResetSearchbar() {
 		searchBarForm.reset()
 		searchBar.classList.remove('active')
 		cross.style.display = 'none'
+		// si tag actif, suppression
+		if (globalKeyword !== '') {
+			globalKeyword = []
+			const tags = document.querySelectorAll('.filter_tag_div')
+			tags.forEach((tag) => {
+				tag.remove()
+			})
+			const tagDiv = document.getElementById('filters_tags')
+			if (tagDiv.innerHTML === '') {
+				tagDiv.classList.remove('filters_tags_active')
+			}
+		}
 		init()
 		searchBar.classList.remove('active')
 		recipesSection.classList.remove('empty')
