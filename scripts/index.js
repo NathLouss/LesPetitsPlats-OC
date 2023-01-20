@@ -16,6 +16,12 @@ let tagList = []
 let globalKeyword = []
 let filteredRecipesByTag = []
 
+const searchBar = document.querySelector('#search_recipe')
+const recipesSection = document.getElementById('recipes')
+const cross = document.querySelector('.search_btn_cross')
+const searchBarForm = document.querySelector('form')
+const recipesLength = document.querySelector('.search_recipe_number')
+
 // création et affichage des cards recette via la recipeFactory
 function displayRecipes(recipes) {
 	sortRecipes(recipes)
@@ -142,18 +148,29 @@ async function init() {
 init()
 
 //------------------------------------------------------------------------------------------
+// Réinitialisation de la page
+function pageReset() {
+	displayRecipes(recipes)
+	listInit(recipes)
+	displayFilterList(lists)
+	searchBarKeyword = []
+	filteredRecipes = []
+	recipesLength.textContent = recipes.length
+	if (searchBar.classList == 'active') {
+		searchBar.classList.remove('active')
+	}
+	if (recipesSection.classList == 'empty') {
+		recipesSection.classList.remove('empty')
+	}
+}
+
+//------------------------------------------------------------------------------------------
 // Dropdown
 const triggers = document.querySelectorAll('.trigger')
 triggers.forEach((trigger) => trigger.addEventListener('click', (e) => toggleDropDown(e)))
 
 //------------------------------------------------------------------------------------------
 // Barre de recherche principale
-const searchBar = document.querySelector('#search_recipe')
-const recipesSection = document.getElementById('recipes')
-const cross = document.querySelector('.search_btn_cross')
-const searchBarForm = document.querySelector('form')
-const recipesLength = document.querySelector('.search_recipe_number')
-
 searchBar.addEventListener('input', (e) => {
 	const value = e.target.value
 
@@ -176,7 +193,7 @@ searchBar.addEventListener('input', (e) => {
 
 		// si déjà recherche par tag, reset
 		if (tagList.length != 0) {
-			resetTagSection()
+			tagSectionReset()
 		}
 
 		//
@@ -188,13 +205,8 @@ searchBar.addEventListener('input', (e) => {
 			recipesSection.classList.remove('empty')
 		}
 	} else {
-		init()
-		searchBar.classList.remove('active')
-		recipesSection.classList.remove('empty')
+		pageReset()
 		cross.style.display = 'none'
-		document.querySelector('.search_recipe_number').textContent = '50'
-		// reset recherche saisie
-		searchBarKeyword = []
 	}
 })
 
@@ -206,21 +218,12 @@ function initResetSearchbar() {
 
 function resetSearchbar() {
 	searchBarForm.reset()
-	searchBar.classList.remove('active')
 	cross.style.display = 'none'
+	pageReset()
 	// si tag actif, reset
 	if (tagList.length != 0) {
-		resetTagSection()
+		tagSectionReset()
 	}
-	searchBarKeyword = []
-	filteredRecipes = []
-	displayRecipes(recipes)
-	listInit(recipes)
-	displayFilterList(lists)
-	if (recipesSection.classList == 'empty') {
-		recipesSection.classList.remove('empty')
-	}
-	document.querySelector('.search_recipe_number').textContent = '50'
 }
 
 //------------------------------------------------------------------------------------------
@@ -275,7 +278,8 @@ inputsFilter.forEach((input) =>
 				displayFilterList(lists, searchBar.value)
 			} else {
 				// initialise la liste des elts avec toutes les recettes
-				init()
+				listInit(recipes)
+				displayFilterList(lists)
 			}
 		}
 	})
@@ -295,7 +299,8 @@ function initResetInput(e) {
 			displayFilterList(lists, searchBar.value)
 		} else {
 			// initialise la liste des elts avec toutes les recettes
-			init()
+			listInit(recipes)
+			displayFilterList(lists)
 		}
 	})
 }
@@ -393,12 +398,12 @@ function filterByKeyword(recipes, globalKeyword) {
 			})
 		})
 	} else {
-		init()
-		document.querySelector('.search_recipe_number').textContent = '50'
+		filteredRecipesByTag = []
+		pageReset()
 	}
 }
 
-function resetTagSection() {
+function tagSectionReset() {
 	tagList = []
 	globalKeyword = []
 	filteredRecipesByTag = []
