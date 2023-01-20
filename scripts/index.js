@@ -10,17 +10,19 @@ let ingredientsList = []
 let appliancesList = []
 let ustensilsList = []
 let lists = []
-let filteredRecipes = []
+let searchBarValue
 let searchBarKeyword = []
+let filteredRecipes = []
 let tagList = []
 let globalKeyword = []
 let filteredRecipesByTag = []
 
 const searchBar = document.querySelector('#search_recipe')
-const recipesSection = document.getElementById('recipes')
-const cross = document.querySelector('.search_btn_cross')
 const searchBarForm = document.querySelector('form')
+const cross = document.querySelector('.search_btn_cross')
+const recipesSection = document.getElementById('recipes')
 const recipesLength = document.querySelector('.search_recipe_number')
+const inputsFilter = document.querySelectorAll('.filter_input')
 
 // création et affichage des cards recette via la recipeFactory
 function displayRecipes(recipes) {
@@ -97,44 +99,33 @@ function displayFilterList(lists, keyword = null) {
 	for (const [filterName, filterList] of Object.entries(lists)) {
 		const ulSection = document.getElementById(`filter_list_${filterName}`)
 		ulSection.innerHTML = ''
-		// si pas de recherche
-		if (!keyword) {
-			// initialisation
-			// on génère la liste html via la filterFactory
-			let filterListModel = filterFactory(filterList)
-			const filterListCardDOM = filterListModel.getFilterListCardDOM()
-			// on postionne un eventlistener sur chaque option de filtre li
-			Object.values(filterListCardDOM).forEach((li) => {
-				li.addEventListener('click', (e) => {
-					createTag(e, filterName)
-				})
-				ulSection.appendChild(li)
+		// on génère la liste html via la filterFactory
+		let filterListModel = filterFactory(filterList)
+		const filterListCardDOM = filterListModel.getFilterListCardDOM()
+		// on postionne un eventlistener sur chaque option de filtre li
+		Object.values(filterListCardDOM).forEach((li) => {
+			li.addEventListener('click', (e) => {
+				createTag(e, filterName)
 			})
-		} else {
-			// si recherche saisie // dans searchbar principale
-			const keywordFormated = keyword
-				.toLowerCase()
-				.normalize('NFD')
-				.replace(/[\u0300-\u036f]/g, '')
-			//filtre les listes en enlevant la valeur saisie
-			const newValuesList = Object.values(filterList).filter((elt) => {
-				const eltFormated = elt
-					.toLowerCase()
-					.normalize('NFD')
-					.replace(/[\u0300-\u036f]/g, '')
-				return !eltFormated.includes(keywordFormated)
-			})
-			// on génère la liste html via la filterFactory
-			let filterListModel = filterFactory(newValuesList)
-			const filterListCardDOM = filterListModel.getFilterListCardDOM()
-			// on postionne un eventlistener sur chaque option de filtre li
-			Object.values(filterListCardDOM).forEach((li) => {
-				li.addEventListener('click', (e) => {
-					createTag(e, filterName)
-				})
-				ulSection.appendChild(li)
-			})
-		}
+			// selon la nature de keyword, applique style aux éléments sélectionnés
+			if (keyword) {
+				const liFormated = format(li.textContent)
+				if (typeof keyword === 'string') {
+					const keywordFormated = format(keyword)
+					if (keywordFormated == liFormated) {
+						li.classList.add('selected')
+					}
+				} else {
+					keyword.forEach((word) => {
+						const wordFormated = format(word)
+						if (wordFormated == liFormated) {
+							li.classList.add('selected')
+						}
+					})
+				}
+			}
+			ulSection.appendChild(li)
+		})
 	}
 }
 
@@ -172,13 +163,17 @@ triggers.forEach((trigger) => trigger.addEventListener('click', (e) => toggleDro
 //------------------------------------------------------------------------------------------
 // Barre de recherche principale
 searchBar.addEventListener('input', (e) => {
-	const value = e.target.value
+	searchBarValue = e.target.value
 
-	if (value.length >= 3) {
-		initResetSearchbar()
+	if (searchBarValue.length >= 3) {
+		// stock recherche saisie
+		searchBarKeyword = []
+		searchBarKeyword.push(searchBarValue)
 		searchBar.classList.add('active')
+		initResetSearchbar()
+
 		// filtre les recettes avec la value de l'input
-		filteredRecipes = filterRecipes(e.target.value, recipes)
+		filteredRecipes = filterRecipes(searchBarValue, recipes)
 		// affiche le nombre de recettes filtrées
 		recipesLength.textContent = filteredRecipes.length
 		// affiche les recettes filtrées
@@ -186,17 +181,14 @@ searchBar.addEventListener('input', (e) => {
 		// réinitialise les listes ingr, app, ustens avec les recettes filtrées
 		listInit(filteredRecipes)
 		// affiche les listes des recettes filtrées
-		displayFilterList(lists, value)
-		// stock recherche saisie
-		searchBarKeyword = []
-		searchBarKeyword.push(value)
+		displayFilterList(lists, searchBarValue)
 
 		// si déjà recherche par tag, reset
 		if (tagList.length != 0) {
 			tagSectionReset()
 		}
 
-		//
+		// si aucune recette trouvée, message erreur
 		if (filteredRecipes.length === 0) {
 			recipesSection.innerHTML =
 				'Aucune recette ne correspond à votre recherche.<br/> Essayez quiche lorraine, chocolat noir, cocotte minute...'
@@ -228,8 +220,6 @@ function resetSearchbar() {
 
 //------------------------------------------------------------------------------------------
 // Filtres de tri
-const inputsFilter = document.querySelectorAll('.filter_input')
-
 inputsFilter.forEach((input) =>
 	input.addEventListener('input', (e) => {
 		const filterValue = e.target.value
@@ -239,17 +229,11 @@ inputsFilter.forEach((input) =>
 			// récupère les li existants
 			const ulSection = document.getElementById(`filter_list_${filterProperty}`)
 			const liSectionList = ulSection.childNodes
-			const keywordFormated = filterValue
-				.toLowerCase()
-				.normalize('NFD')
-				.replace(/[\u0300-\u036f]/g, '')
+			const keywordFormated = format(filterValue)
 			// filtre les li ceux qui contiennent la même valeur que le filtre saisi
 			const newFilterList = []
 			Object.values(liSectionList).filter((li) => {
-				const eltFormated = li.innerHTML
-					.toLowerCase()
-					.normalize('NFD')
-					.replace(/[\u0300-\u036f]/g, '')
+				const eltFormated = format(li.innerHTML)
 				if (eltFormated.includes(keywordFormated)) {
 					newFilterList.push(eltFormated)
 				}
@@ -263,6 +247,8 @@ inputsFilter.forEach((input) =>
 				liFilter.textContent = eltFormated
 				// on postionne un eventlistener sur chaque option de filtre li
 				liFilter.addEventListener('click', (e) => {
+					// WARNING ???????
+
 					createTag(e, filterProperty, recipes)
 				})
 				ulSection.appendChild(liFilter)
@@ -272,10 +258,10 @@ inputsFilter.forEach((input) =>
 				reset.style.display = 'none'
 			})
 			// si searchbar principale active
-			if (searchBar.value !== '') {
+			if (searchBarValue !== '') {
 				// réinitialise la liste des elts avec toutes les recettes filtrées
 				listInit(filteredRecipes)
-				displayFilterList(lists, searchBar.value)
+				displayFilterList(lists, searchBarValue)
 			} else {
 				// initialise la liste des elts avec toutes les recettes
 				listInit(recipes)
@@ -358,19 +344,16 @@ function deleteTag(e) {
 	if (tagDiv.innerHTML === '') {
 		tagDiv.classList.remove('filters_tags_active')
 	}
-
 	// supprime le tag de tagList
 	const index = tagList.indexOf(e.target.previousSibling.innerHTML)
 	if (index > -1) {
 		tagList.splice(index, 1)
 	}
-
 	// supprime le tag de globalKeyword
 	const index2 = globalKeyword.indexOf(e.target.previousSibling.innerHTML)
 	if (index2 > -1) {
 		globalKeyword.splice(index2, 1)
 	}
-
 	filterByKeyword(recipes, globalKeyword)
 }
 
@@ -387,15 +370,7 @@ function filterByKeyword(recipes, globalKeyword) {
 			// réinitialise les listes ingr, app, ustens avec les recettes filtrées
 			listInit(filteredRecipesByTag)
 			// affiche les listes des recettes filtrées
-			displayFilterList(lists)
-		})
-
-		document.querySelectorAll('.filter_li').forEach((li) => {
-			globalKeyword.forEach((keyword) => {
-				if (keyword == li.textContent) {
-					li.classList.add('selected')
-				}
-			})
+			displayFilterList(lists, globalKeyword)
 		})
 	} else {
 		filteredRecipesByTag = []
@@ -413,4 +388,14 @@ function tagSectionReset() {
 	})
 	const tagDiv = document.getElementById('filters_tags')
 	tagDiv.classList.remove('filters_tags_active')
+}
+
+//------------------------------------------------------------------------------------------
+// Formatage des éléments
+function format(e) {
+	const formattedElement = e
+		.toLowerCase()
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+	return formattedElement
 }
