@@ -174,6 +174,12 @@ searchBar.addEventListener('input', (e) => {
 		searchBarKeyword = []
 		searchBarKeyword.push(value)
 
+		// si déjà recherche par tag, reset
+		if (tagList.length != 0) {
+			resetTagSection()
+		}
+
+		//
 		if (filteredRecipes.length === 0) {
 			recipesSection.innerHTML =
 				'Aucune recette ne correspond à votre recherche.<br/> Essayez quiche lorraine, chocolat noir, cocotte minute...'
@@ -202,17 +208,9 @@ function resetSearchbar() {
 	searchBarForm.reset()
 	searchBar.classList.remove('active')
 	cross.style.display = 'none'
-	// si tag actif, suppression
-	if (globalKeyword.length != 0) {
-		tagList = []
-		globalKeyword = []
-		filteredRecipesByTag = []
-		const tags = document.querySelectorAll('.filter_tag_div')
-		tags.forEach((tag) => {
-			tag.remove()
-		})
-		const tagDiv = document.getElementById('filters_tags')
-		tagDiv.classList.remove('filters_tags_active')
+	// si tag actif, reset
+	if (tagList.length != 0) {
+		resetTagSection()
 	}
 	searchBarKeyword = []
 	filteredRecipes = []
@@ -398,4 +396,16 @@ function filterByKeyword(recipes, globalKeyword) {
 		init()
 		document.querySelector('.search_recipe_number').textContent = '50'
 	}
+}
+
+function resetTagSection() {
+	tagList = []
+	globalKeyword = []
+	filteredRecipesByTag = []
+	const tags = document.querySelectorAll('.filter_tag_div')
+	tags.forEach((tag) => {
+		tag.remove()
+	})
+	const tagDiv = document.getElementById('filters_tags')
+	tagDiv.classList.remove('filters_tags_active')
 }
