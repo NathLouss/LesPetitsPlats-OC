@@ -247,9 +247,7 @@ inputsFilter.forEach((input) =>
 				liFilter.textContent = eltFormated
 				// on postionne un eventlistener sur chaque option de filtre li
 				liFilter.addEventListener('click', (e) => {
-					// WARNING ???????
-
-					createTag(e, filterProperty, recipes)
+					createTag(e, filterProperty)
 				})
 				ulSection.appendChild(liFilter)
 			})
@@ -258,10 +256,10 @@ inputsFilter.forEach((input) =>
 				reset.style.display = 'none'
 			})
 			// si searchbar principale active
-			if (searchBarValue !== '') {
+			if (searchBar.value !== '') {
 				// réinitialise la liste des elts avec toutes les recettes filtrées
 				listInit(filteredRecipes)
-				displayFilterList(lists, searchBarValue)
+				displayFilterList(lists, searchBar.value)
 			} else {
 				// initialise la liste des elts avec toutes les recettes
 				listInit(recipes)
