@@ -11,6 +11,7 @@
 #filters_tags {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .filters_tags_active {
@@ -35,6 +36,7 @@
 .fa-times-circle {
   color: white;
   padding-left: 13px;
+  cursor: pointer;
 }
 
 .filter {
@@ -54,12 +56,12 @@
 }
 
 .filter_btn,
-.filter_list {
+.filter_form {
   color: white;
   border-radius: 5px;
 }
 
-.filter_list {
+.filter_form {
   display: none;
   cursor: pointer;
   z-index: 1;
@@ -73,17 +75,17 @@
   background-color: #3282f7;
 }
 
-#filter_btn_appareil,
-#input_appareil,
-#filter_list_appareil,
-.color_tag_appareil {
+#filter_btn_appliance,
+#input_appliance,
+#filter_list_appliance,
+.color_tag_appliance {
   background-color: #68d9a4;
 }
 
-#filter_btn_ustensile,
-#input_ustensile,
-#filter_list_ustensile,
-.color_tag_ustensile {
+#filter_btn_ustensil,
+#input_ustensil,
+#filter_list_ustensil,
+.color_tag_ustensil {
   background-color: #ed6454;
 }
 
@@ -110,6 +112,16 @@
   outline: none;
 }
 
+.filter_reset {
+  display: none;
+  font-size: 20px;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  color: #4b3d3da6;
+  cursor: pointer;
+}
+
 .filter_chevron_up {
   position: absolute;
   right: 15px;
@@ -122,12 +134,11 @@
   right: 15px;
 }
 
-.list_option {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  column-gap: 70px;
-  row-gap: 10px;
+.filter_list{
+  display: none; 
+  grid-auto-flow: column; 
+  grid-template-rows: repeat(10, 1fr); 
+  gap: 10px 40px; 
   position: absolute;
   height: 397px;
   width: 667px;
@@ -135,30 +146,46 @@
   padding: 0 16px 19px;
   border-radius: 0 0 5px 5px;
   overflow-x: scroll;
+  z-index: 99;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 5px;
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
+.scrollbar::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px rgb(255, 254, 254);
   border-radius: 10px;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
+.scrollbar::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.562);
   border-radius: 10px;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+.scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.795);
 }
 
 .filter_li {
-  width: 150px;
+  color: white;
+  width: 180px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: pointer;
 }
+
+.filter_li:hover {
+  font-weight: bolder;
+  width: 155px;
+}
+
+.selected {
+ color: #ffffff80;
+ cursor: default ;
+}
+
+.selected:hover {
+  font-weight: normal;
+ }

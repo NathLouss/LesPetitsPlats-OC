@@ -3,19 +3,22 @@ header {
   margin-bottom: 20px;
 }
 
+h1 {
+  font-family: "DM Sans";
+  font-weight: 700;
+  color: #d04f4f;
+}
+
 img {
   width: 60px;
 }
 
-h1 {
-  font-size: 36px;
-  font-weight: 700;
-  font-family: "DM Sans";
-  color: #d04f4f;
-}
-
 #search {
   margin-bottom: 20px;
+}
+
+form {
+  position: relative;
 }
 
 #search_recipe {
@@ -30,6 +33,14 @@ h1 {
   font-family: "Lato";
 }
 
+#search_recipe:hover {
+box-shadow: 0px 0px 10px 1px rgb(211, 211, 211) inset;
+}
+
+.active {
+  border: 1px solid #a7a7a7!important;
+}
+
 #search_recipe::placeholder {
   color: #adadad;
 }
@@ -37,32 +48,52 @@ h1 {
 #search_btn_recipe {
   font-size: 32px;
   position: absolute;
-  top: 170px;
-  right: 65px;
+  top: 18px;
+  right: 30px;
   border: none;
-  background-color: #e7e7e7;
+  background-color: transparent;
+  padding-bottom: 5px;
+}
+
+.search_btn_cross {
+  display: none;
+  font-size: 25px;
+  position: absolute;
+  top: 25px;
+  right: 120px;
+  color: #d04f4f;
+  cursor: pointer;
+}
+
+.search_recipe_length {
+  padding-top: 35px;
 }
 
 /* RECIPE SECTION */
 #recipes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  row-gap: 50px;
-  column-gap: 5%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
 }
 
 .empty {
-  font-size: 24px;
-  justify-content: center !important;
-  padding-top: 200px;
+  display: block!important;
+  font-size: 20px;
+  justify-content: center!important;
+  text-align: center;
+  margin: 10%;
 }
 
 /* RECIPE CARD */
 .recipe_card {
-  flex-basis: 30%;
   height: 364px;
   min-width: 380px;
+  border-radius: 5px;
+}
+
+.recipe_card:hover {
+  box-shadow: 2px 2px 10px 1px #b3b0b0;
 }
 
 .recipe_link {
@@ -89,6 +120,7 @@ h1 {
   text-align: start;
   display: flex;
   justify-content: space-between;
+  text-align: start;
 }
 
 .recipe_header h2 {
@@ -119,6 +151,12 @@ h1 {
   gap: 5px;
 }
 
+.li_recipe {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .recipe_ingredients {
   flex-basis: 50%;
 }
@@ -139,6 +177,4 @@ h1 {
 .recipe_description_text {
   font-family: "roboto";
   height: 98px;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
