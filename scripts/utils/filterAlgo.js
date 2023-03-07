@@ -1,4 +1,4 @@
-import { format } from '../index.js'
+import { format } from '../utils/formatElement.js'
 
 // déclaration variable
 let filteredRecipes = []
