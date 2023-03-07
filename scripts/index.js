@@ -3,6 +3,7 @@ import { recipeFactory } from './factory/recipeFactory.js'
 import { filterFactory } from './factory/filterFactory.js'
 import { filterRecipes, sortRecipes } from './utils/filterAlgo.js'
 import { toggleDropDown } from './utils/dropdown.js'
+import { format } from './utils/formatElement.js'
 
 // déclaration variables
 let recipes = []
@@ -310,7 +311,6 @@ inputsFilter.forEach((input) => {
 
 //------------------------------------------------------------------------------------------
 // Gestion des tags
-
 function createTag(e, selectedFilter) {
 	if (!e.target.className.includes('selected')) {
 		const filterTag = document.getElementById('filters_tags')
@@ -405,14 +405,4 @@ function tagSectionReset() {
 
 	const tagDiv = document.getElementById('filters_tags')
 	tagDiv.classList.remove('filters_tags_active')
-}
-
-//------------------------------------------------------------------------------------------
-// Formatage des éléments
-export function format(e) {
-	const formattedElement = e
-		.toLowerCase()
-		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
-	return formattedElement
 }
