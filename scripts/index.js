@@ -26,7 +26,7 @@ const inputsFilter = document.querySelectorAll('.filter_input')
 
 // création et affichage des cards recette via la recipeFactory
 function displayRecipes(recipes) {
-	sortRecipes(recipes)
+	sortRecipes(recipes, `name`)
 	const recipesSection = document.getElementById('recipes')
 	recipesSection.innerHTML = ''
 
